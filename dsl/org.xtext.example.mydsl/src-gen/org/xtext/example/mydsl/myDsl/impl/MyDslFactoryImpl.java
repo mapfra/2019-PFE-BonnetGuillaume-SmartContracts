@@ -66,6 +66,9 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
     switch (eClass.getClassifierID())
     {
       case MyDslPackage.DOMAINMODEL: return createDomainmodel();
+      case MyDslPackage.ABSTRACT_ELEMENT: return createAbstractElement();
+      case MyDslPackage.PACKAGE_DECLARATION: return createPackageDeclaration();
+      case MyDslPackage.IMPORT: return createImport();
       case MyDslPackage.TYPE: return createType();
       case MyDslPackage.DATA_TYPE: return createDataType();
       case MyDslPackage.ENTITY: return createEntity();
@@ -85,6 +88,42 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     DomainmodelImpl domainmodel = new DomainmodelImpl();
     return domainmodel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public AbstractElement createAbstractElement()
+  {
+    AbstractElementImpl abstractElement = new AbstractElementImpl();
+    return abstractElement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public PackageDeclaration createPackageDeclaration()
+  {
+    PackageDeclarationImpl packageDeclaration = new PackageDeclarationImpl();
+    return packageDeclaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Import createImport()
+  {
+    ImportImpl import_ = new ImportImpl();
+    return import_;
   }
 
   /**

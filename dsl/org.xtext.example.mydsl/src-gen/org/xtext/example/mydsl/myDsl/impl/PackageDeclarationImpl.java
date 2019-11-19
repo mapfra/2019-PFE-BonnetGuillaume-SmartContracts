@@ -3,29 +3,40 @@
  */
 package org.xtext.example.mydsl.myDsl.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
+import org.xtext.example.mydsl.myDsl.AbstractElement;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Type;
+import org.xtext.example.mydsl.myDsl.PackageDeclaration;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Package Declaration</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.TypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl#getElement <em>Element</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TypeImpl extends AbstractElementImpl implements Type
+public class PackageDeclarationImpl extends AbstractElementImpl implements PackageDeclaration
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -48,11 +59,21 @@ public class TypeImpl extends AbstractElementImpl implements Type
   protected String name = NAME_EDEFAULT;
 
   /**
+   * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getElement()
+   * @generated
+   * @ordered
+   */
+  protected EList<AbstractElement> element;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypeImpl()
+  protected PackageDeclarationImpl()
   {
     super();
   }
@@ -65,7 +86,7 @@ public class TypeImpl extends AbstractElementImpl implements Type
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.TYPE;
+    return MyDslPackage.Literals.PACKAGE_DECLARATION;
   }
 
   /**
@@ -90,7 +111,38 @@ public class TypeImpl extends AbstractElementImpl implements Type
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.TYPE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.PACKAGE_DECLARATION__NAME, oldName, name));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<AbstractElement> getElement()
+  {
+    if (element == null)
+    {
+      element = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, MyDslPackage.PACKAGE_DECLARATION__ELEMENT);
+    }
+    return element;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
+        return ((InternalEList<?>)getElement()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -103,8 +155,10 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
+      case MyDslPackage.PACKAGE_DECLARATION__NAME:
         return getName();
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
+        return getElement();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -114,13 +168,18 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
+      case MyDslPackage.PACKAGE_DECLARATION__NAME:
         setName((String)newValue);
+        return;
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
+        getElement().clear();
+        getElement().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +195,11 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
+      case MyDslPackage.PACKAGE_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
+        return;
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
+        getElement().clear();
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +215,10 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
+      case MyDslPackage.PACKAGE_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
+        return element != null && !element.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -176,4 +240,4 @@ public class TypeImpl extends AbstractElementImpl implements Type
     return result.toString();
   }
 
-} //TypeImpl
+} //PackageDeclarationImpl

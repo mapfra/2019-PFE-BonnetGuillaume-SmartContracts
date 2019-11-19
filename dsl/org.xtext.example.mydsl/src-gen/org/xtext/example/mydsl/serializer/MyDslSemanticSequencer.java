@@ -18,7 +18,9 @@ import org.xtext.example.mydsl.myDsl.DataType;
 import org.xtext.example.mydsl.myDsl.Domainmodel;
 import org.xtext.example.mydsl.myDsl.Entity;
 import org.xtext.example.mydsl.myDsl.Feature;
+import org.xtext.example.mydsl.myDsl.Import;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
+import org.xtext.example.mydsl.myDsl.PackageDeclaration;
 import org.xtext.example.mydsl.services.MyDslGrammarAccess;
 
 @SuppressWarnings("all")
@@ -47,6 +49,12 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 			case MyDslPackage.FEATURE:
 				sequence_Feature(context, (Feature) semanticObject); 
 				return; 
+			case MyDslPackage.IMPORT:
+				sequence_Import(context, (Import) semanticObject); 
+				return; 
+			case MyDslPackage.PACKAGE_DECLARATION:
+				sequence_PackageDeclaration(context, (PackageDeclaration) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -54,6 +62,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     AbstractElement returns DataType
 	 *     Type returns DataType
 	 *     DataType returns DataType
 	 *
@@ -76,7 +85,7 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Domainmodel returns Domainmodel
 	 *
 	 * Constraint:
-	 *     elements+=Type+
+	 *     elements+=AbstractElement+
 	 */
 	protected void sequence_Domainmodel(ISerializationContext context, Domainmodel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -85,11 +94,12 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	
 	/**
 	 * Contexts:
+	 *     AbstractElement returns Entity
 	 *     Type returns Entity
 	 *     Entity returns Entity
 	 *
 	 * Constraint:
-	 *     (name=ID superType=[Entity|ID]? features+=Feature*)
+	 *     (name=ID superType=[Entity|QualifiedName]? features+=Feature*)
 	 */
 	protected void sequence_Entity(ISerializationContext context, Entity semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -101,9 +111,41 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Feature returns Feature
 	 *
 	 * Constraint:
-	 *     (many?='many'? name=ID type=[Type|ID])
+	 *     (many?='many'? name=ID type=[Type|QualifiedName])
 	 */
 	protected void sequence_Feature(ISerializationContext context, Feature semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns Import
+	 *     Import returns Import
+	 *
+	 * Constraint:
+	 *     importNamespace=QualifiedNameWithWildcard
+	 */
+	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.IMPORT__IMPORT_NAMESPACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.IMPORT__IMPORT_NAMESPACE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getImportAccess().getImportNamespaceQualifiedNameWithWildcardParserRuleCall_1_0(), semanticObject.getImportNamespace());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     AbstractElement returns PackageDeclaration
+	 *     PackageDeclaration returns PackageDeclaration
+	 *
+	 * Constraint:
+	 *     (name=QualifiedName element+=AbstractElement*)
+	 */
+	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

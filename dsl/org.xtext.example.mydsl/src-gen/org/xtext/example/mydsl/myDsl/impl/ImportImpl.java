@@ -9,50 +9,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.xtext.example.mydsl.myDsl.Import;
 import org.xtext.example.mydsl.myDsl.MyDslPackage;
-import org.xtext.example.mydsl.myDsl.Type;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Import</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.TypeImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl#getImportNamespace <em>Import Namespace</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TypeImpl extends AbstractElementImpl implements Type
+public class ImportImpl extends AbstractElementImpl implements Import
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The default value of the '{@link #getImportNamespace() <em>Import Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getImportNamespace()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
+  protected static final String IMPORT_NAMESPACE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getImportNamespace() <em>Import Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getImportNamespace()
    * @generated
    * @ordered
    */
-  protected String name = NAME_EDEFAULT;
+  protected String importNamespace = IMPORT_NAMESPACE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypeImpl()
+  protected ImportImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class TypeImpl extends AbstractElementImpl implements Type
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.TYPE;
+    return MyDslPackage.Literals.IMPORT;
   }
 
   /**
@@ -74,9 +74,9 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * @generated
    */
   @Override
-  public String getName()
+  public String getImportNamespace()
   {
-    return name;
+    return importNamespace;
   }
 
   /**
@@ -85,12 +85,12 @@ public class TypeImpl extends AbstractElementImpl implements Type
    * @generated
    */
   @Override
-  public void setName(String newName)
+  public void setImportNamespace(String newImportNamespace)
   {
-    String oldName = name;
-    name = newName;
+    String oldImportNamespace = importNamespace;
+    importNamespace = newImportNamespace;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.TYPE__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.IMPORT__IMPORT_NAMESPACE, oldImportNamespace, importNamespace));
   }
 
   /**
@@ -103,8 +103,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        return getName();
+      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
+        return getImportNamespace();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        setName((String)newValue);
+      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
+        setImportNamespace((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        setName(NAME_EDEFAULT);
+      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
+        setImportNamespace(IMPORT_NAMESPACE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class TypeImpl extends AbstractElementImpl implements Type
   {
     switch (featureID)
     {
-      case MyDslPackage.TYPE__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
+        return IMPORT_NAMESPACE_EDEFAULT == null ? importNamespace != null : !IMPORT_NAMESPACE_EDEFAULT.equals(importNamespace);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class TypeImpl extends AbstractElementImpl implements Type
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
+    result.append(" (importNamespace: ");
+    result.append(importNamespace);
     result.append(')');
     return result.toString();
   }
 
-} //TypeImpl
+} //ImportImpl

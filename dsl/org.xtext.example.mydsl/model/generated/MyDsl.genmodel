@@ -9,6 +9,14 @@
     <genClasses ecoreClass="MyDsl.ecore#//Domainmodel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//Domainmodel/elements"/>
     </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="MyDsl.ecore#//PackageDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//PackageDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//PackageDeclaration/element"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Import/importNamespace"/>
+    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//Type/name"/>
     </genClasses>
