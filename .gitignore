@@ -83,6 +83,20 @@ local.properties
 .apt_generated_test/
 
 # Scala IDE specific (Scala & Java development for Eclipse)
+
+
+#########################################
+#		ECLIPSE			#
+#########################################
+
+/.m2/
+bin/
+build/
+.gradle/
+*._trace
+*.xtendbin
+org.eclipse.buildship.core.prefs
+.DS_Store
 .cache-main
 .scala_dependencies
 .worksheet
