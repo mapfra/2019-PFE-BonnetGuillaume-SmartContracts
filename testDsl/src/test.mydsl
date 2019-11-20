@@ -28,7 +28,7 @@ package my.company.blog {
         many comments: Comment
     }
 
-    entity Comment extends my.company.common.HasAuthor {
+    entity Comment extends HasAuthor {
         content: String
     }
 }
