@@ -20,7 +20,7 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl#getImportNamespace <em>Import Namespace</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  *
  * @generated
@@ -28,24 +28,24 @@ import org.xtext.example.mydsl.myDsl.MyDslPackage;
 public class ImportImpl extends AbstractElementImpl implements Import
 {
   /**
-   * The default value of the '{@link #getImportNamespace() <em>Import Namespace</em>}' attribute.
+   * The default value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImportNamespace()
+   * @see #getImportedNamespace()
    * @generated
    * @ordered
    */
-  protected static final String IMPORT_NAMESPACE_EDEFAULT = null;
+  protected static final String IMPORTED_NAMESPACE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getImportNamespace() <em>Import Namespace</em>}' attribute.
+   * The cached value of the '{@link #getImportedNamespace() <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getImportNamespace()
+   * @see #getImportedNamespace()
    * @generated
    * @ordered
    */
-  protected String importNamespace = IMPORT_NAMESPACE_EDEFAULT;
+  protected String importedNamespace = IMPORTED_NAMESPACE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,9 +74,9 @@ public class ImportImpl extends AbstractElementImpl implements Import
    * @generated
    */
   @Override
-  public String getImportNamespace()
+  public String getImportedNamespace()
   {
-    return importNamespace;
+    return importedNamespace;
   }
 
   /**
@@ -85,12 +85,12 @@ public class ImportImpl extends AbstractElementImpl implements Import
    * @generated
    */
   @Override
-  public void setImportNamespace(String newImportNamespace)
+  public void setImportedNamespace(String newImportedNamespace)
   {
-    String oldImportNamespace = importNamespace;
-    importNamespace = newImportNamespace;
+    String oldImportedNamespace = importedNamespace;
+    importedNamespace = newImportedNamespace;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.IMPORT__IMPORT_NAMESPACE, oldImportNamespace, importNamespace));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.IMPORT__IMPORTED_NAMESPACE, oldImportedNamespace, importedNamespace));
   }
 
   /**
@@ -103,8 +103,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
-        return getImportNamespace();
+      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
+        return getImportedNamespace();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
-        setImportNamespace((String)newValue);
+      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
+        setImportedNamespace((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
-        setImportNamespace(IMPORT_NAMESPACE_EDEFAULT);
+      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
+        setImportedNamespace(IMPORTED_NAMESPACE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
   {
     switch (featureID)
     {
-      case MyDslPackage.IMPORT__IMPORT_NAMESPACE:
-        return IMPORT_NAMESPACE_EDEFAULT == null ? importNamespace != null : !IMPORT_NAMESPACE_EDEFAULT.equals(importNamespace);
+      case MyDslPackage.IMPORT__IMPORTED_NAMESPACE:
+        return IMPORTED_NAMESPACE_EDEFAULT == null ? importedNamespace != null : !IMPORTED_NAMESPACE_EDEFAULT.equals(importedNamespace);
     }
     return super.eIsSet(featureID);
   }
@@ -170,8 +170,8 @@ public class ImportImpl extends AbstractElementImpl implements Import
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (importNamespace: ");
-    result.append(importNamespace);
+    result.append(" (importedNamespace: ");
+    result.append(importedNamespace);
     result.append(')');
     return result.toString();
   }

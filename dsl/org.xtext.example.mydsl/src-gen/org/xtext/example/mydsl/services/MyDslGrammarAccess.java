@@ -38,6 +38,47 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//AbstractElement
 		public RuleCall getElementsAbstractElementParserRuleCall_0() { return cElementsAbstractElementParserRuleCall_0; }
 	}
+	public class PackageDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.PackageDeclaration");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cElementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cElementsAbstractElementParserRuleCall_3_0 = (RuleCall)cElementsAssignment_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//PackageDeclaration:
+		//	'package' name=QualifiedName '{'
+		//	elements+=AbstractElement*
+		//	'}';
+		@Override public ParserRule getRule() { return rule; }
+		
+		//'package' name=QualifiedName '{' elements+=AbstractElement* '}'
+		public Group getGroup() { return cGroup; }
+		
+		//'package'
+		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
+		
+		//name=QualifiedName
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+		
+		//QualifiedName
+		public RuleCall getNameQualifiedNameParserRuleCall_1_0() { return cNameQualifiedNameParserRuleCall_1_0; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		
+		//elements+=AbstractElement*
+		public Assignment getElementsAssignment_3() { return cElementsAssignment_3; }
+		
+		//AbstractElement
+		public RuleCall getElementsAbstractElementParserRuleCall_3_0() { return cElementsAbstractElementParserRuleCall_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+	}
 	public class AbstractElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.AbstractElement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -60,47 +101,6 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//Import
 		public RuleCall getImportParserRuleCall_2() { return cImportParserRuleCall_2; }
-	}
-	public class PackageDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.PackageDeclaration");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cPackageKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameQualifiedNameParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cElementAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cElementAbstractElementParserRuleCall_3_0 = (RuleCall)cElementAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//PackageDeclaration:
-		//	'package' name=QualifiedName '{'
-		//	element+=AbstractElement*
-		//	'}';
-		@Override public ParserRule getRule() { return rule; }
-		
-		//'package' name=QualifiedName '{' element+=AbstractElement* '}'
-		public Group getGroup() { return cGroup; }
-		
-		//'package'
-		public Keyword getPackageKeyword_0() { return cPackageKeyword_0; }
-		
-		//name=QualifiedName
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//QualifiedName
-		public RuleCall getNameQualifiedNameParserRuleCall_1_0() { return cNameQualifiedNameParserRuleCall_1_0; }
-		
-		//'{'
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-		
-		//element+=AbstractElement*
-		public Assignment getElementAssignment_3() { return cElementAssignment_3; }
-		
-		//AbstractElement
-		public RuleCall getElementAbstractElementParserRuleCall_3_0() { return cElementAbstractElementParserRuleCall_3_0; }
-		
-		//'}'
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.QualifiedName");
@@ -133,24 +133,24 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.Import");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cImportNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportNamespaceQualifiedNameWithWildcardParserRuleCall_1_0 = (RuleCall)cImportNamespaceAssignment_1.eContents().get(0);
+		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//	'import' importNamespace=QualifiedNameWithWildcard;
+		//	'import' importedNamespace=QualifiedNameWithWildcard;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//'import' importNamespace=QualifiedNameWithWildcard
+		//'import' importedNamespace=QualifiedNameWithWildcard
 		public Group getGroup() { return cGroup; }
 		
 		//'import'
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 		
-		//importNamespace=QualifiedNameWithWildcard
-		public Assignment getImportNamespaceAssignment_1() { return cImportNamespaceAssignment_1; }
+		//importedNamespace=QualifiedNameWithWildcard
+		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
 		
 		//QualifiedNameWithWildcard
-		public RuleCall getImportNamespaceQualifiedNameWithWildcardParserRuleCall_1_0() { return cImportNamespaceQualifiedNameWithWildcardParserRuleCall_1_0; }
+		public RuleCall getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0; }
 	}
 	public class QualifiedNameWithWildcardElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.xtext.example.mydsl.MyDsl.QualifiedNameWithWildcard");
@@ -320,8 +320,8 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	private final DomainmodelElements pDomainmodel;
-	private final AbstractElementElements pAbstractElement;
 	private final PackageDeclarationElements pPackageDeclaration;
+	private final AbstractElementElements pAbstractElement;
 	private final QualifiedNameElements pQualifiedName;
 	private final ImportElements pImport;
 	private final QualifiedNameWithWildcardElements pQualifiedNameWithWildcard;
@@ -340,8 +340,8 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pDomainmodel = new DomainmodelElements();
-		this.pAbstractElement = new AbstractElementElements();
 		this.pPackageDeclaration = new PackageDeclarationElements();
+		this.pAbstractElement = new AbstractElementElements();
 		this.pQualifiedName = new QualifiedNameElements();
 		this.pImport = new ImportElements();
 		this.pQualifiedNameWithWildcard = new QualifiedNameWithWildcardElements();
@@ -388,6 +388,18 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getDomainmodelAccess().getRule();
 	}
 	
+	//PackageDeclaration:
+	//	'package' name=QualifiedName '{'
+	//	elements+=AbstractElement*
+	//	'}';
+	public PackageDeclarationElements getPackageDeclarationAccess() {
+		return pPackageDeclaration;
+	}
+	
+	public ParserRule getPackageDeclarationRule() {
+		return getPackageDeclarationAccess().getRule();
+	}
+	
 	//AbstractElement:
 	//	PackageDeclaration | Type | Import;
 	public AbstractElementElements getAbstractElementAccess() {
@@ -396,18 +408,6 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getAbstractElementRule() {
 		return getAbstractElementAccess().getRule();
-	}
-	
-	//PackageDeclaration:
-	//	'package' name=QualifiedName '{'
-	//	element+=AbstractElement*
-	//	'}';
-	public PackageDeclarationElements getPackageDeclarationAccess() {
-		return pPackageDeclaration;
-	}
-	
-	public ParserRule getPackageDeclarationRule() {
-		return getPackageDeclarationAccess().getRule();
 	}
 	
 	//QualifiedName:
@@ -421,7 +421,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	//Import:
-	//	'import' importNamespace=QualifiedNameWithWildcard;
+	//	'import' importedNamespace=QualifiedNameWithWildcard;
 	public ImportElements getImportAccess() {
 		return pImport;
 	}

@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.testing.InjectWith;
+import org.eclipse.xtext.testing.XtextRunner;
 import org.eclipse.xtext.testing.extensions.InjectionExtension;
 import org.eclipse.xtext.testing.util.ParseHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -15,9 +16,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
+import org.xtext.example.mydsl.myDsl.AbstractElement;
 import org.xtext.example.mydsl.myDsl.Domainmodel;
+import org.xtext.example.mydsl.myDsl.Entity;
+import org.xtext.example.mydsl.myDsl.Feature;
 import org.xtext.example.mydsl.tests.MyDslInjectorProvider;
 
+@RunWith(XtextRunner.class)
 @ExtendWith(InjectionExtension.class)
 @InjectWith(MyDslInjectorProvider.class)
 @SuppressWarnings("all")
@@ -29,7 +35,7 @@ public class MyDslParsingTest {
   public void loadModel() {
     try {
       StringConcatenation _builder = new StringConcatenation();
-      _builder.append("Hello Xtext!");
+      _builder.append("entity MyEntity {}");
       _builder.newLine();
       final Domainmodel result = this.parseHelper.parse(_builder);
       Assertions.assertNotNull(result);
@@ -40,6 +46,19 @@ public class MyDslParsingTest {
       String _join = IterableExtensions.join(errors, ", ");
       _builder_1.append(_join);
       Assertions.assertTrue(_isEmpty, _builder_1.toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void parsemydsl() {
+    try {
+      final Domainmodel model = this.parseHelper.parse(
+        "entity MyEntity {\n\t\t\t\tparent: MyEntity\n\t\t\t}");
+      AbstractElement _head = IterableExtensions.<AbstractElement>head(model.getElements());
+      final Entity entity = ((Entity) _head);
+      Assertions.assertSame(entity, IterableExtensions.<Feature>head(entity.getFeatures()).getType());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

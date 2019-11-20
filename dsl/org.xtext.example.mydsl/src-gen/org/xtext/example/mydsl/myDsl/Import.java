@@ -13,7 +13,7 @@ package org.xtext.example.mydsl.myDsl;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.xtext.example.mydsl.myDsl.Import#getImportNamespace <em>Import Namespace</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.Import#getImportedNamespace <em>Imported Namespace</em>}</li>
  * </ul>
  *
  * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getImport()
@@ -23,25 +23,25 @@ package org.xtext.example.mydsl.myDsl;
 public interface Import extends AbstractElement
 {
   /**
-   * Returns the value of the '<em><b>Import Namespace</b></em>' attribute.
+   * Returns the value of the '<em><b>Imported Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Import Namespace</em>' attribute.
-   * @see #setImportNamespace(String)
-   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getImport_ImportNamespace()
+   * @return the value of the '<em>Imported Namespace</em>' attribute.
+   * @see #setImportedNamespace(String)
+   * @see org.xtext.example.mydsl.myDsl.MyDslPackage#getImport_ImportedNamespace()
    * @model
    * @generated
    */
-  String getImportNamespace();
+  String getImportedNamespace();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Import#getImportNamespace <em>Import Namespace</em>}' attribute.
+   * Sets the value of the '{@link org.xtext.example.mydsl.myDsl.Import#getImportedNamespace <em>Imported Namespace</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Import Namespace</em>' attribute.
-   * @see #getImportNamespace()
+   * @param value the new value of the '<em>Imported Namespace</em>' attribute.
+   * @see #getImportedNamespace()
    * @generated
    */
-  void setImportNamespace(String value);
+  void setImportedNamespace(String value);
 
 } // Import

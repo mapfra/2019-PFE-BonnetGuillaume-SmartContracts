@@ -33,15 +33,6 @@ public interface MyDslFactory extends EFactory
   Domainmodel createDomainmodel();
 
   /**
-   * Returns a new object of class '<em>Abstract Element</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Abstract Element</em>'.
-   * @generated
-   */
-  AbstractElement createAbstractElement();
-
-  /**
    * Returns a new object of class '<em>Package Declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -49,6 +40,15 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   PackageDeclaration createPackageDeclaration();
+
+  /**
+   * Returns a new object of class '<em>Abstract Element</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Element</em>'.
+   * @generated
+   */
+  AbstractElement createAbstractElement();
 
   /**
    * Returns a new object of class '<em>Import</em>'.

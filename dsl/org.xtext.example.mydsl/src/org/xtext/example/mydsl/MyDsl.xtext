@@ -4,24 +4,24 @@ generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 Domainmodel:
     (elements+=AbstractElement)*;
-    
-AbstractElement :
-	PackageDeclaration|Type|Import;
-
+ 
 PackageDeclaration:
-	'package' name=QualifiedName '{'
-		(element+=AbstractElement)*
-	'}';
-
+    'package' name=QualifiedName '{'
+        (elements+=AbstractElement)*
+    '}';
+ 
+AbstractElement:
+    PackageDeclaration | Type | Import;
+ 
 QualifiedName:
-	ID ('.' ID)*;
-
+    ID ('.' ID)*;
+ 
 Import:
-	'import' importNamespace=QualifiedNameWithWildcard;
-
+    'import' importedNamespace=QualifiedNameWithWildcard;
+  
 QualifiedNameWithWildcard:
-	QualifiedName '.*'?;
-
+    QualifiedName '.*'?;
+  
 Type:
     DataType | Entity;
   

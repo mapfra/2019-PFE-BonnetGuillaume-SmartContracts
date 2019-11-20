@@ -96,51 +96,6 @@ ruleDomainmodel returns [EObject current=null]
 	)*
 ;
 
-// Entry rule entryRuleAbstractElement
-entryRuleAbstractElement returns [EObject current=null]:
-	{ newCompositeNode(grammarAccess.getAbstractElementRule()); }
-	iv_ruleAbstractElement=ruleAbstractElement
-	{ $current=$iv_ruleAbstractElement.current; }
-	EOF;
-
-// Rule AbstractElement
-ruleAbstractElement returns [EObject current=null]
-@init {
-	enterRule();
-}
-@after {
-	leaveRule();
-}:
-	(
-		{
-			newCompositeNode(grammarAccess.getAbstractElementAccess().getPackageDeclarationParserRuleCall_0());
-		}
-		this_PackageDeclaration_0=rulePackageDeclaration
-		{
-			$current = $this_PackageDeclaration_0.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getAbstractElementAccess().getTypeParserRuleCall_1());
-		}
-		this_Type_1=ruleType
-		{
-			$current = $this_Type_1.current;
-			afterParserOrEnumRuleCall();
-		}
-		    |
-		{
-			newCompositeNode(grammarAccess.getAbstractElementAccess().getImportParserRuleCall_2());
-		}
-		this_Import_2=ruleImport
-		{
-			$current = $this_Import_2.current;
-			afterParserOrEnumRuleCall();
-		}
-	)
-;
-
 // Entry rule entryRulePackageDeclaration
 entryRulePackageDeclaration returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getPackageDeclarationRule()); }
@@ -187,17 +142,17 @@ rulePackageDeclaration returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getPackageDeclarationAccess().getElementAbstractElementParserRuleCall_3_0());
+					newCompositeNode(grammarAccess.getPackageDeclarationAccess().getElementsAbstractElementParserRuleCall_3_0());
 				}
-				lv_element_3_0=ruleAbstractElement
+				lv_elements_3_0=ruleAbstractElement
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getPackageDeclarationRule());
 					}
 					add(
 						$current,
-						"element",
-						lv_element_3_0,
+						"elements",
+						lv_elements_3_0,
 						"org.xtext.example.mydsl.MyDsl.AbstractElement");
 					afterParserOrEnumRuleCall();
 				}
@@ -206,6 +161,51 @@ rulePackageDeclaration returns [EObject current=null]
 		otherlv_4='}'
 		{
 			newLeafNode(otherlv_4, grammarAccess.getPackageDeclarationAccess().getRightCurlyBracketKeyword_4());
+		}
+	)
+;
+
+// Entry rule entryRuleAbstractElement
+entryRuleAbstractElement returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getAbstractElementRule()); }
+	iv_ruleAbstractElement=ruleAbstractElement
+	{ $current=$iv_ruleAbstractElement.current; }
+	EOF;
+
+// Rule AbstractElement
+ruleAbstractElement returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		{
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getPackageDeclarationParserRuleCall_0());
+		}
+		this_PackageDeclaration_0=rulePackageDeclaration
+		{
+			$current = $this_PackageDeclaration_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getTypeParserRuleCall_1());
+		}
+		this_Type_1=ruleType
+		{
+			$current = $this_Type_1.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getAbstractElementAccess().getImportParserRuleCall_2());
+		}
+		this_Import_2=ruleImport
+		{
+			$current = $this_Import_2.current;
+			afterParserOrEnumRuleCall();
 		}
 	)
 ;
@@ -273,17 +273,17 @@ ruleImport returns [EObject current=null]
 		(
 			(
 				{
-					newCompositeNode(grammarAccess.getImportAccess().getImportNamespaceQualifiedNameWithWildcardParserRuleCall_1_0());
+					newCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0());
 				}
-				lv_importNamespace_1_0=ruleQualifiedNameWithWildcard
+				lv_importedNamespace_1_0=ruleQualifiedNameWithWildcard
 				{
 					if ($current==null) {
 						$current = createModelElementForParent(grammarAccess.getImportRule());
 					}
 					set(
 						$current,
-						"importNamespace",
-						lv_importNamespace_1_0,
+						"importedNamespace",
+						lv_importedNamespace_1_0,
 						"org.xtext.example.mydsl.MyDsl.QualifiedNameWithWildcard");
 					afterParserOrEnumRuleCall();
 				}

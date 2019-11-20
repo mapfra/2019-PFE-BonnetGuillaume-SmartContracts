@@ -93,7 +93,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractElement()
    * @generated
    */
-  int ABSTRACT_ELEMENT = 1;
+  int ABSTRACT_ELEMENT = 2;
 
   /**
    * The number of structural features of the '<em>Abstract Element</em>' class.
@@ -112,7 +112,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getPackageDeclaration()
    * @generated
    */
-  int PACKAGE_DECLARATION = 2;
+  int PACKAGE_DECLARATION = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -124,13 +124,13 @@ public interface MyDslPackage extends EPackage
   int PACKAGE_DECLARATION__NAME = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Element</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int PACKAGE_DECLARATION__ELEMENT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int PACKAGE_DECLARATION__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Package Declaration</em>' class.
@@ -152,13 +152,13 @@ public interface MyDslPackage extends EPackage
   int IMPORT = 3;
 
   /**
-   * The feature id for the '<em><b>Import Namespace</b></em>' attribute.
+   * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int IMPORT__IMPORT_NAMESPACE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int IMPORT__IMPORTED_NAMESPACE = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Import</em>' class.
@@ -340,16 +340,6 @@ public interface MyDslPackage extends EPackage
   EReference getDomainmodel_Elements();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.AbstractElement <em>Abstract Element</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Abstract Element</em>'.
-   * @see org.xtext.example.mydsl.myDsl.AbstractElement
-   * @generated
-   */
-  EClass getAbstractElement();
-
-  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.PackageDeclaration <em>Package Declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -371,15 +361,25 @@ public interface MyDslPackage extends EPackage
   EAttribute getPackageDeclaration_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.PackageDeclaration#getElement <em>Element</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl.myDsl.PackageDeclaration#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Element</em>'.
-   * @see org.xtext.example.mydsl.myDsl.PackageDeclaration#getElement()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.xtext.example.mydsl.myDsl.PackageDeclaration#getElements()
    * @see #getPackageDeclaration()
    * @generated
    */
-  EReference getPackageDeclaration_Element();
+  EReference getPackageDeclaration_Elements();
+
+  /**
+   * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.AbstractElement <em>Abstract Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Abstract Element</em>'.
+   * @see org.xtext.example.mydsl.myDsl.AbstractElement
+   * @generated
+   */
+  EClass getAbstractElement();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Import <em>Import</em>}'.
@@ -392,15 +392,15 @@ public interface MyDslPackage extends EPackage
   EClass getImport();
 
   /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Import#getImportNamespace <em>Import Namespace</em>}'.
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl.myDsl.Import#getImportedNamespace <em>Imported Namespace</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Import Namespace</em>'.
-   * @see org.xtext.example.mydsl.myDsl.Import#getImportNamespace()
+   * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+   * @see org.xtext.example.mydsl.myDsl.Import#getImportedNamespace()
    * @see #getImport()
    * @generated
    */
-  EAttribute getImport_ImportNamespace();
+  EAttribute getImport_ImportedNamespace();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl.myDsl.Type <em>Type</em>}'.
@@ -550,16 +550,6 @@ public interface MyDslPackage extends EPackage
     EReference DOMAINMODEL__ELEMENTS = eINSTANCE.getDomainmodel_Elements();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl
-     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractElement()
-     * @generated
-     */
-    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
-
-    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl <em>Package Declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -578,12 +568,22 @@ public interface MyDslPackage extends EPackage
     EAttribute PACKAGE_DECLARATION__NAME = eINSTANCE.getPackageDeclaration_Name();
 
     /**
-     * The meta object literal for the '<em><b>Element</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference PACKAGE_DECLARATION__ELEMENT = eINSTANCE.getPackageDeclaration_Element();
+    EReference PACKAGE_DECLARATION__ELEMENTS = eINSTANCE.getPackageDeclaration_Elements();
+
+    /**
+     * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl <em>Abstract Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.xtext.example.mydsl.myDsl.impl.AbstractElementImpl
+     * @see org.xtext.example.mydsl.myDsl.impl.MyDslPackageImpl#getAbstractElement()
+     * @generated
+     */
+    EClass ABSTRACT_ELEMENT = eINSTANCE.getAbstractElement();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.ImportImpl <em>Import</em>}' class.
@@ -596,12 +596,12 @@ public interface MyDslPackage extends EPackage
     EClass IMPORT = eINSTANCE.getImport();
 
     /**
-     * The meta object literal for the '<em><b>Import Namespace</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute IMPORT__IMPORT_NAMESPACE = eINSTANCE.getImport_ImportNamespace();
+    EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl.myDsl.impl.TypeImpl <em>Type</em>}' class.

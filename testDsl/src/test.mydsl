@@ -1,20 +1,34 @@
+// datatypes.dmodel
+ 
 datatype String
+
+// commons.dmodel
  
-entity Blog {
-    title: String
-    many posts: Post
+package my.company.common {
+	
+    entity HasAuthor {
+        author: String
+    }
 }
- 
-entity HasAuthor {
-    author: String
-}
- 
-entity Post extends HasAuthor {
-    title: String
-    content: String
-    many comments: Comment
-}
- 
-entity Comment extends HasAuthor {
-    content: String
+
+// blogs.dmodel
+     
+package my.company.blog {
+  
+    import my.company.common.*
+
+    entity Blog {
+        title: String
+        many posts: Post
+    }
+
+    entity Post extends my.company.common.HasAuthor {
+        title: String
+        content: String
+        many comments: Comment
+    }
+
+    entity Comment extends my.company.common.HasAuthor {
+        content: String
+    }
 }

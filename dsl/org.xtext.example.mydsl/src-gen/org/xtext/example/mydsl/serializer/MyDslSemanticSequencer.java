@@ -124,26 +124,26 @@ public class MyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer 
 	 *     Import returns Import
 	 *
 	 * Constraint:
-	 *     importNamespace=QualifiedNameWithWildcard
+	 *     importedNamespace=QualifiedNameWithWildcard
 	 */
 	protected void sequence_Import(ISerializationContext context, Import semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.IMPORT__IMPORT_NAMESPACE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.IMPORT__IMPORT_NAMESPACE));
+			if (transientValues.isValueTransient(semanticObject, MyDslPackage.Literals.IMPORT__IMPORTED_NAMESPACE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, MyDslPackage.Literals.IMPORT__IMPORTED_NAMESPACE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getImportAccess().getImportNamespaceQualifiedNameWithWildcardParserRuleCall_1_0(), semanticObject.getImportNamespace());
+		feeder.accept(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_0(), semanticObject.getImportedNamespace());
 		feeder.finish();
 	}
 	
 	
 	/**
 	 * Contexts:
-	 *     AbstractElement returns PackageDeclaration
 	 *     PackageDeclaration returns PackageDeclaration
+	 *     AbstractElement returns PackageDeclaration
 	 *
 	 * Constraint:
-	 *     (name=QualifiedName element+=AbstractElement*)
+	 *     (name=QualifiedName elements+=AbstractElement*)
 	 */
 	protected void sequence_PackageDeclaration(ISerializationContext context, PackageDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

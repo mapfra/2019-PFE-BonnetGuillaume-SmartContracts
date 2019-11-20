@@ -11,7 +11,11 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.^extension.ExtendWith
 import org.xtext.example.mydsl.myDsl.Domainmodel
+import org.junit.runner.RunWith
+import org.eclipse.xtext.testing.XtextRunner
+import org.xtext.example.mydsl.myDsl.Entity
 
+@RunWith(XtextRunner)
 @ExtendWith(InjectionExtension)
 @InjectWith(MyDslInjectorProvider)
 class MyDslParsingTest {
@@ -21,10 +25,20 @@ class MyDslParsingTest {
 	@Test
 	def void loadModel() {
 		val result = parseHelper.parse('''
-			Hello Xtext!
+			entity MyEntity {}
 		''')
 		Assertions.assertNotNull(result)
 		val errors = result.eResource.errors
 		Assertions.assertTrue(errors.isEmpty, '''Unexpected errors: «errors.join(", ")»''')
+	}
+	
+	@Test
+	def void parsemydsl() {
+		val model = parseHelper.parse(
+			"entity MyEntity {
+				parent: MyEntity
+			}")
+		val entity = model.elements.head as Entity
+		Assertions.assertSame(entity, entity.features.head.type)
 	}
 }

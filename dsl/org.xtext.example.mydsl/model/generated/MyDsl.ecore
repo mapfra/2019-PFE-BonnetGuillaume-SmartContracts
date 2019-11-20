@@ -5,14 +5,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//AbstractElement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="PackageDeclaration" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//AbstractElement" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Import" eSuperTypes="#//AbstractElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type" eSuperTypes="#//AbstractElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

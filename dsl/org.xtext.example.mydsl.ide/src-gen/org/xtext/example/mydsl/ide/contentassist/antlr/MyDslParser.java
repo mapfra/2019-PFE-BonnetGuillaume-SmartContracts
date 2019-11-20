@@ -44,8 +44,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getFeatureAccess().getGroup(), "rule__Feature__Group__0");
 			builder.put(grammarAccess.getDomainmodelAccess().getElementsAssignment(), "rule__Domainmodel__ElementsAssignment");
 			builder.put(grammarAccess.getPackageDeclarationAccess().getNameAssignment_1(), "rule__PackageDeclaration__NameAssignment_1");
-			builder.put(grammarAccess.getPackageDeclarationAccess().getElementAssignment_3(), "rule__PackageDeclaration__ElementAssignment_3");
-			builder.put(grammarAccess.getImportAccess().getImportNamespaceAssignment_1(), "rule__Import__ImportNamespaceAssignment_1");
+			builder.put(grammarAccess.getPackageDeclarationAccess().getElementsAssignment_3(), "rule__PackageDeclaration__ElementsAssignment_3");
+			builder.put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 			builder.put(grammarAccess.getDataTypeAccess().getNameAssignment_1(), "rule__DataType__NameAssignment_1");
 			builder.put(grammarAccess.getEntityAccess().getNameAssignment_1(), "rule__Entity__NameAssignment_1");
 			builder.put(grammarAccess.getEntityAccess().getSuperTypeAssignment_2_1(), "rule__Entity__SuperTypeAssignment_2_1");

@@ -80,18 +80,18 @@ public class MyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.ABSTRACT_ELEMENT:
-      {
-        AbstractElement abstractElement = (AbstractElement)theEObject;
-        T result = caseAbstractElement(abstractElement);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.PACKAGE_DECLARATION:
       {
         PackageDeclaration packageDeclaration = (PackageDeclaration)theEObject;
         T result = casePackageDeclaration(packageDeclaration);
         if (result == null) result = caseAbstractElement(packageDeclaration);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case MyDslPackage.ABSTRACT_ELEMENT:
+      {
+        AbstractElement abstractElement = (AbstractElement)theEObject;
+        T result = caseAbstractElement(abstractElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -157,22 +157,6 @@ public class MyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAbstractElement(AbstractElement object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Package Declaration</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -184,6 +168,22 @@ public class MyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePackageDeclaration(PackageDeclaration object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractElement(AbstractElement object)
   {
     return null;
   }

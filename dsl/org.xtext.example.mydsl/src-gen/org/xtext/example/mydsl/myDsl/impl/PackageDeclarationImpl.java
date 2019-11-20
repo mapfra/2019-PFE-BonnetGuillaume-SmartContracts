@@ -31,7 +31,7 @@ import org.xtext.example.mydsl.myDsl.PackageDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl.myDsl.impl.PackageDeclarationImpl#getElements <em>Elements</em>}</li>
  * </ul>
  *
  * @generated
@@ -59,14 +59,14 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElement()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<AbstractElement> element;
+  protected EList<AbstractElement> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,13 +120,13 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
    * @generated
    */
   @Override
-  public EList<AbstractElement> getElement()
+  public EList<AbstractElement> getElements()
   {
-    if (element == null)
+    if (elements == null)
     {
-      element = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, MyDslPackage.PACKAGE_DECLARATION__ELEMENT);
+      elements = new EObjectContainmentEList<AbstractElement>(AbstractElement.class, this, MyDslPackage.PACKAGE_DECLARATION__ELEMENTS);
     }
-    return element;
+    return elements;
   }
 
   /**
@@ -139,8 +139,8 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
   {
     switch (featureID)
     {
-      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
-        return ((InternalEList<?>)getElement()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -157,8 +157,8 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
     {
       case MyDslPackage.PACKAGE_DECLARATION__NAME:
         return getName();
-      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
-        return getElement();
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -177,9 +177,9 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
       case MyDslPackage.PACKAGE_DECLARATION__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
-        getElement().clear();
-        getElement().addAll((Collection<? extends AbstractElement>)newValue);
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends AbstractElement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -198,8 +198,8 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
       case MyDslPackage.PACKAGE_DECLARATION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
-        getElement().clear();
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -217,8 +217,8 @@ public class PackageDeclarationImpl extends AbstractElementImpl implements Packa
     {
       case MyDslPackage.PACKAGE_DECLARATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.PACKAGE_DECLARATION__ELEMENT:
-        return element != null && !element.isEmpty();
+      case MyDslPackage.PACKAGE_DECLARATION__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }
