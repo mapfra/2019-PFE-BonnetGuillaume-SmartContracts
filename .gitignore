@@ -89,7 +89,12 @@ local.properties
 #		XTEXT			#
 #########################################
 
-*src-gen*
+dsl/org.xtext.example.mydsl.ide/src-gen/*
+dsl/org.xtext.example.mydsl.tests/src-gen/*
+dsl/org.xtext.example.mydsl.ui.tests/src-gen/*
+dsl/org.xtext.example.mydsl.ui/src-gen/*
+dsl/org.xtext.example.mydsl/src-gen/*
+
 /.m2/
 bin/
 build/
