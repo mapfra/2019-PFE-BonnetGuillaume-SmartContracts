@@ -3,10 +3,8 @@
  */
 package org.xtext.example.mydsl.validation
 
-import org.xtext.example.mydsl.myDsl.Entity
 import org.eclipse.xtext.validation.Check
 import org.xtext.example.mydsl.myDsl.MyDslPackage
-import org.xtext.example.mydsl.myDsl.Feature
 
 /**
  * This class contains custom validation rules. 
@@ -14,28 +12,5 @@ import org.xtext.example.mydsl.myDsl.Feature
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#validation
  */
 class MyDslValidator extends AbstractMyDslValidator {
-	
-	@Check
-	def void checkNamesStartWithCapital(Entity entity) {
-		if(!Character.isUpperCase(entity.name.charAt(0))) {
-        	warning("Name should start with a capital", 
-            MyDslPackage.Literals.TYPE__NAME)
-    	}
-	}
-	
-	@Check
-	def void checkFeatureNameIsUnique(Feature f) {
-		var superEntity = (f.eContainer as Entity).superType
-		while (superEntity !== null) {
-			for (other : superEntity.features) {
-				if (f.name == other.name) {
-					error("Feature names have to be unique",
-						MyDslPackage.Literals.FEATURE__NAME)
-					return
-				}
-			}
-			superEntity = superEntity.getSuperType()
-		}
-	}
 	
 }
