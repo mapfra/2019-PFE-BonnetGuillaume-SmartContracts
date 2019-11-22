@@ -1,11 +1,11 @@
-Contrat { 
-		Prestataire {}	;
-		Client {}; 
-		Mediateur {}; 
-		Paiement {
-			Prix: 4
-		};
-		
-		Date : "date";
-		Ville : "ville";
+Contrat contract {
+	Prestataire {};
+	Client {};
+	Mediateur {};
+	Paiement {
+		Prix : 10
+	};
+	
+	Date : "date";
+	Ville : "ville";
 }

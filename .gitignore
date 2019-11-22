@@ -89,7 +89,9 @@ local.properties
 #		XTEXT			#
 #########################################
 
-*gen*
+*-gen*
+
+dsl/org.xtext.example.mydsl/model/*
 
 /.m2/
 bin/

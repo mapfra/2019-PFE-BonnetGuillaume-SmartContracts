@@ -6,10 +6,11 @@ Model:
 	contract=Contract;
 	
 Contract:
-	'Contrat' '{' 	Recipient ';'
-					Client ';' 
-					Mediator ';' 
-					Payment ';'
+	'Contrat' contract=ID '{' 	
+					recipient=Recipient ';'
+					client=Client ';' 
+					mediator=Mediator ';' 
+					payment=Payment ';'
 					
 					'Date' ':' date=STRING ';'
 					'Ville' ':' town=STRING ';'
@@ -17,20 +18,26 @@ Contract:
 ;
 
 Recipient:
-	'Prestataire' '{' '}'
+	'Prestataire' '{'
+		(name=ID)?
+	'}' 
 ;
 
 
 Client:
-	'Client' '{' '}'
+	'Client' '{'
+		(name=ID)?
+	'}'
 ;
 
 Mediator:
-	'Mediateur' '{' '}'
+	'Mediateur' '{'
+		(name=ID)?	
+	'}'
 ;
 
 Payment:
 	'Paiement' '{'
-		'Prix' ':' prix=INT
+		'Prix' ':' price=INT
 	'}'	
 ;
