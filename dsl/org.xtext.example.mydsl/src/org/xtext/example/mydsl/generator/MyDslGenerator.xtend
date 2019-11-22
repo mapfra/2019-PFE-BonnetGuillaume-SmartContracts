@@ -28,7 +28,7 @@ class MyDslGenerator extends AbstractGenerator {
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val contract = (resource.allContents.toIterable.filter(Contract)).get(0);
 		fsa.generateFile(
-			contract.contract + ".sol",
+			contract.contract.toFirstUpper + ".sol",
 			contract.compile
 		)
 	}
@@ -36,7 +36,7 @@ class MyDslGenerator extends AbstractGenerator {
 	def compile(Contract c) '''
 		pragma solidity >=0.4.21 <0.6.0;
 		
-		contract «c.contract» {
+		contract «c.contract.toFirstUpper» {
 			«c.recipient.compile»
 			
 			«c.client.compile»
@@ -51,7 +51,7 @@ class MyDslGenerator extends AbstractGenerator {
 			uint public dueDate = now + 30 seconds;
 			uint public lastDate = dueDate + 15 days;
 			
-			constructor(String _pdfHash) public {
+			constructor(string memory _pdfHash) public {
 				pdfHash = _pdfHash;
 			}
 			
@@ -70,7 +70,7 @@ class MyDslGenerator extends AbstractGenerator {
 				late();
 				return price;
 			}
-		};
+		}
     '''
     
 	def compile(Recipient r) '''
