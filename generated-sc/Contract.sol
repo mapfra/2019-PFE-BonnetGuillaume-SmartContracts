@@ -1,6 +1,6 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-contract contract {
+contract Contract {
 	address public recipient = msg.sender;
 	
 	address public client = 0x33c6711d314f5bbCAa09cf49CF0c734D038A642B;
@@ -15,7 +15,7 @@ contract contract {
 	uint public dueDate = now + 30 seconds;
 	uint public lastDate = dueDate + 15 days;
 	
-	constructor(String _pdfHash) public {
+	constructor(string memory _pdfHash) public {
 		pdfHash = _pdfHash;
 	}
 	
@@ -34,4 +34,4 @@ contract contract {
 		late();
 		return price;
 	}
-};
+}
