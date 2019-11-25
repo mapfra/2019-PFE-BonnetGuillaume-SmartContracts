@@ -19,25 +19,33 @@ Contract:
 
 Recipient:
 	'Prestataire' '{'
-		(name=ID)?
+		'nom de societe' ':' name=STRING ';'
+		'capital de la societe' ':' capital=STRING ';'
+		'adresse du siege sociale' ':' address=STRING ';'
+		'ville de registre' ':' register=STRING ';'
+		'numero Siret' ':' siret=STRING ';'
+		'nom du representant legal' ':' delegate=STRING ';'	
 	'}' 
 ;
 
-
 Client:
 	'Client' '{'
-		(name=ID)?
+		'nom du client' ':' name=STRING ';'
+		'prenom' ':' surname=STRING ';'
+		'adresse' ':' address=STRING ';'
+		'identifiant blockchain' ':' id=STRING ';'
 	'}'
 ;
 
 Mediator:
 	'Mediateur' '{'
-		(name=ID)?	
+		'nom du mediateur' ':' name=STRING ';'
+		'contact' ':' contact=STRING ';'
 	'}'
 ;
 
 Payment:
 	'Paiement' '{'
-		'Prix' ':' price=INT
+		'prix' ':' price=INT ';'
 	'}'	
 ;

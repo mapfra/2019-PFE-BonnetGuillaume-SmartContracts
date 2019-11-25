@@ -47,7 +47,7 @@ class MyDslGenerator extends AbstractGenerator {
 		const Contract = artifacts.require("Contract");
 		
 		module.exports = function(deployer) {
-		  deployer.deploy(Contract, pdfHash); //todo enter pdf signed hash before deployment
+		  deployer.deploy(Contract, "pdfHash"); //todo enter pdf signed hash before deployment
 		};
 		
 	'''
@@ -84,8 +84,8 @@ class MyDslGenerator extends AbstractGenerator {
 		
 			function late() public isActive {
 				require(now > dueDate && !isLate);
-		    		price += 1;
-		    		isLate = true;
+		    	price += 1;
+		    	isLate = true;
 			}
 		
 			function verify() public isActive returns(uint)  {
@@ -115,7 +115,7 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (Client c) '''
-		address public client = 0x418794fAd774Ce02E8Feef44d8b37Ef594BeB557;
+		address public client = «c.id»;
 	'''
 	
 	def compile (Payment p) '''
@@ -136,7 +136,7 @@ class MyDslGenerator extends AbstractGenerator {
 		\title{Entre les soussignés}
 		\\
 		
-		La société Renault SAS, au capital de 533 941 113 euros, ayant son siège social au 13 Quai Alphonse le Gallo – Boulogne-Billancourt inscrite au Registre du commerce et des sociétés de Nanterre sous le numéro 780 129 987 03591, pris en la personne de son représentant légal, MONSIEUR XX. \\
+		La société «c.recipient.name», au capital de «c.recipient.capital» euros, ayant son siège social au «c.recipient.address» inscrite au Registre du commerce et des sociétés de «c.recipient.register» sous le numéro «c.recipient.siret», pris en la personne de son représentant légal, MONSIEUR «c.recipient.delegate». \\
 		
 		Ci-après désigné "le Prestataire" \\ 
 		
@@ -144,7 +144,7 @@ class MyDslGenerator extends AbstractGenerator {
 		
 		Et :\\
 		
-		Nom, prénom, adresse\\
+		«c.client.name», «c.client.name», «c.client.address»\\
 		
 		Ci-après désigné "le Client"\\
 		
@@ -347,7 +347,7 @@ class MyDslGenerator extends AbstractGenerator {
 		Toute réclamation doit être adressée au service clientèle de l'entreprise dont l'adresse suit.
 		
 		\subsection{Médiation}
-		En cas d'échec de la demande de réclamation faite après du service clientèle ou en cas d'une absence de réponse dans ce service dans le délai de quinze jours, le consommateur, bénéficiaire du service, peut soumettre le différend qui l'oppose à son contractant au médiateur (METTRE NOM ET CONTACT) qui tentera, en toute indépendance et impartialité, de rapprocher les parties en vue d'aboutir à une solution amiable.
+		En cas d'échec de la demande de réclamation faite après du service clientèle ou en cas d'une absence de réponse dans ce service dans le délai de quinze jours, le consommateur, bénéficiaire du service, peut soumettre le différend qui l'oppose à son contractant au médiateur («c.mediator.name» «c.mediator.contact») qui tentera, en toute indépendance et impartialité, de rapprocher les parties en vue d'aboutir à une solution amiable.
 		
 		\subsection{Clause attributive de compétence}
 		Le tribunal compétent territorialement est le tribunal du lieu ou du siège social du défendeur ou sur celui du lieu d'exécution de la prestation de services.\\
@@ -358,7 +358,7 @@ class MyDslGenerator extends AbstractGenerator {
 		\begin{table}[h]
 		    \begin{tabular}{p{8cm} p{8cm}}
 		        Le Prestataire & Le Client \\
-		        nom du signataire & nom du signataire \\      
+		        «c.recipient.delegate» & «c.client.name» \\      
 		        signature & signature
 		    \end{tabular}
 		\end{table}
