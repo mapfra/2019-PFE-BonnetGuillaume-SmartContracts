@@ -36,7 +36,21 @@ class MyDslGenerator extends AbstractGenerator {
 			contract.contract.toFirstUpper + ".tex",
 			toPdf(contract)
 		)
+		
+		fsa.generateFile(
+			"4_" +contract.contract.toLowerCase + "_migration.js",
+			migrator(contract)
+		)
 	}
+		
+	def migrator(Contract contract) '''
+		const Contract = artifacts.require("Contract");
+		
+		module.exports = function(deployer) {
+		  deployer.deploy(Contract, pdfHash); //todo enter pdf signed hash before deployment
+		};
+		
+	'''
 		
 	def compile(Contract c) '''
 		pragma solidity >=0.4.21 <0.6.0;
@@ -101,7 +115,7 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compile (Client c) '''
-		address public client = 0x33c6711d314f5bbCAa09cf49CF0c734D038A642B;
+		address public client = 0x418794fAd774Ce02E8Feef44d8b37Ef594BeB557;
 	'''
 	
 	def compile (Payment p) '''
