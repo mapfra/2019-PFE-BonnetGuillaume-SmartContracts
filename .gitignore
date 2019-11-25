@@ -101,6 +101,13 @@ build/
 *.xtendbin
 org.eclipse.buildship.core.prefs
 .DS_Store
+
+#########################################
+#		GANACHE			#
+#########################################
+
+*ganache*
+
 .cache-main
 .scala_dependencies
 .worksheet
