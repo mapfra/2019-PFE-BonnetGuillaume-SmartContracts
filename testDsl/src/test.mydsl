@@ -6,6 +6,6 @@ Contrat contract {
 		Prix : 10
 	};
 	
-	Date : "date";
-	Ville : "ville";
+	Date : "dateTest";
+	Ville : "villeTest";
 }
