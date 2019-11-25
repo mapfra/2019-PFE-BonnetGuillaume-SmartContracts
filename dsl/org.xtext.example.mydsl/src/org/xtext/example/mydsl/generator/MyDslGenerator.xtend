@@ -45,19 +45,22 @@ class MyDslGenerator extends AbstractGenerator {
 			«c.recipient.compile»
 			
 			«c.client.compile»
-
+		
 			bool public active = true;
 			bool public isLate = false;
-
+			mapping(address => bool) public reactivate_will;
+		
 			«c.payment.compile»
-
+		
 			string public pdfHash;
-
+		
 			uint public dueDate = now + 30 seconds;
 			uint public lastDate = dueDate + 15 days;
 			
 			constructor(string memory _pdfHash) public {
 				pdfHash = _pdfHash;
+				reactivate_will[recipient] = false;
+				reactivate_will[client] = false;
 			}
 			
 			modifier isActive {
@@ -65,15 +68,30 @@ class MyDslGenerator extends AbstractGenerator {
 				_;
 			}
 		
-			function late() public {
+			function late() public isActive {
 				require(now > dueDate && !isLate);
-		    	price += 1;
-		    	isLate = true;
+		    		price += 1;
+		    		isLate = true;
 			}
 		
-			function verify() public returns(uint)  {
+			function verify() public isActive returns(uint)  {
 				late();
 				return price;
+			}
+		
+			function desactivate() public isActive {
+				require(msg.sender == client || msg.sender == recipient);	
+				active = false;
+			}
+		
+			function reactivate() public {
+				require(!active && (msg.sender == client || msg.sender == recipient));
+				reactivate_will[msg.sender] = true;
+				if(reactivate_will[client] && reactivate_will[recipient]){
+					active = true;
+					reactivate_will[client] = false;
+					reactivate_will[recipient] = false;
+				}
 			}
 		}
     '''
