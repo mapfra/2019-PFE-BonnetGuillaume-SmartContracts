@@ -6,46 +6,55 @@ Model:
 	contract=Contract;
 	
 Contract:
-	'Contrat' contract=ID '{' 	
-					recipient=Recipient ';'
-					client=Client ';' 
-					mediator=Mediator ';' 
-					payment=Payment ';'
+	'Contrat de prestation de service nommé ' contract=STRING '.'
+					'Entre les soussignés :' 	
+					recipient=Recipient 
+					'Et :'
+					client=Client
 					
-					'Date' ':' date=STRING ';'
-					'Ville' ':' town=STRING ';'
-	'}'
+					mediator=Mediator
+					
+					payment=Payment
+					
+					'Contrat fais le ' date=DATE
+					' à ' town=STRING '.'
 ;
 
 Recipient:
-	'Prestataire' '{'
-		'nom de societe' ':' name=STRING ';'
-		'capital de la societe' ':' capital=STRING ';'
-		'adresse du siege sociale' ':' address=STRING ';'
-		'ville de registre' ':' register=STRING ';'
-		'numero Siret' ':' siret=STRING ';'
-		'nom du representant legal' ':' delegate=STRING ';'	
-	'}' 
+	'La société ' name=STRING
+	', au capital de ' capital=NEW_INT ' euros,'
+	'ayant son siège social au ' address=ADDRESS_TYPE 
+	'inscrite au registre du commerce et des sociétés de ' register=STRING ','
+	'sous le numéro ' siret=NEW_INT ', pris en la personne de son représentant légal, monsieur ' delegate=STRING '.'
+	"Ci-après désigné le prestataire d'identifiant blockchain " id=BLOCK_CHAIN_ID "."
 ;
 
 Client:
-	'Client' '{'
-		'nom du client' ':' name=STRING ';'
-		'prenom' ':' surname=STRING ';'
-		'adresse' ':' address=STRING ';'
-		'identifiant blockchain' ':' id=STRING ';'
-	'}'
+	'La personne de nom ' name=STRING 
+	', et de prénom ' surname=STRING ', résidant au ' address=ADDRESS_TYPE '.'
+	"Ci-après désigné le client d'identifiant blockchain " id=BLOCK_CHAIN_ID "."
 ;
+
 
 Mediator:
-	'Mediateur' '{'
-		'nom du mediateur' ':' name=STRING ';'
-		'contact' ':' contact=STRING ';'
-	'}'
+	'Le médiateur, nommé ' name=STRING ', est joignable ' c=(Address|Number) '.'
 ;
 
+Address: "à l'adresse " contact=ADDRESS_TYPE;
+
+Number: "au numéro " contact=STRING;
+
 Payment:
-	'Paiement' '{'
-		'prix' ':' price=INT ';'
-	'}'	
+	'Le paiement de ' price=NEW_INT " euros sera réglé à chaque début du mois."
 ;
+
+terminal NEW_INT : '"'('0'..'9')+'"';
+
+terminal DATE : ('1'..'9')+" "("Janvier"|"Février"|"Mars"|"Avril"|"Mai"|"Juin"|"Juillet"|"Août"|"Septembre"|"Octobre"|"Novembre"|"Décembre")" "('1'..'3')('0'..'9')('0'..'9')('0'..'9');
+
+terminal ADDRESS_TYPE: ('0'..'9')+" "("rue"|"avenue"|"boulevard"|"voie"|"impasse"|"chemin")" "('a'..'z'|'A'..'Z'|" "|"'"|"-"|"é"|"è"|"à")+" "('0'..'9')+" "('a'..'z'|'A'..'Z'|" "|"'"|"-"|"é"|"è"|"à")+;
+
+terminal BLOCK_CHAIN_ID : "0x"('0'..'9')*;
+
+terminal STRING_: ('a'..'z'|'A'..'Z'|" "|"'"|"-"|"é"|"è"|"à")+;
+

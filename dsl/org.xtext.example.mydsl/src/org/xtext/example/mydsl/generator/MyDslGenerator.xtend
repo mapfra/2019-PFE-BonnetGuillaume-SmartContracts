@@ -13,6 +13,9 @@ import org.xtext.example.mydsl.myDsl.Contract
 import org.xtext.example.mydsl.myDsl.Recipient
 import org.xtext.example.mydsl.myDsl.Client
 import org.xtext.example.mydsl.myDsl.Payment
+import org.xtext.example.mydsl.myDsl.Address
+import org.xtext.example.mydsl.myDsl.Number
+
 
 /**
  * Generates code from your model files on save.
@@ -347,7 +350,16 @@ class MyDslGenerator extends AbstractGenerator {
 		Toute réclamation doit être adressée au service clientèle de l'entreprise dont l'adresse suit.
 		
 		\subsection{Médiation}
-		En cas d'échec de la demande de réclamation faite après du service clientèle ou en cas d'une absence de réponse dans ce service dans le délai de quinze jours, le consommateur, bénéficiaire du service, peut soumettre le différend qui l'oppose à son contractant au médiateur («c.mediator.name» «c.mediator.contact») qui tentera, en toute indépendance et impartialité, de rapprocher les parties en vue d'aboutir à une solution amiable.
+		En cas d'échec de la demande de réclamation faite après du service clientèle ou en cas d'une absence de réponse dans ce service dans le délai de quinze jours, le consommateur, bénéficiaire du service, peut soumettre le différend qui l'oppose à son contractant au médiateur 
+		(«c.mediator.name» 
+		«IF c.mediator.c instanceof Address»
+			«(c.mediator.c as Address).contact»)
+		«ENDIF»
+		«IF c.mediator.c instanceof Number»
+			«(c.mediator.c as Number).contact»)
+		«ENDIF»
+		
+		qui tentera, en toute indépendance et impartialité, de rapprocher les parties en vue d'aboutir à une solution amiable.
 		
 		\subsection{Clause attributive de compétence}
 		Le tribunal compétent territorialement est le tribunal du lieu ou du siège social du défendeur ou sur celui du lieu d'exécution de la prestation de services.\\
