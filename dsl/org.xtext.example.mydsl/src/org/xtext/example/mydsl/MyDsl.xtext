@@ -3,58 +3,62 @@ grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
 generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
 
 Model:
-	contract=Contract;
-	
+	contract=Contract 
+	(declarations+=Declaration)* 
+	(sus_res+=Sus_Res)* 
+	(fonctions+=Fonction)*;
+
 Contract:
-	'Contrat de prestation de service nommé ' contract=STRING '.'
-					'Entre les soussignés :' 	
-					recipient=Recipient 
-					'Et :'
-					client=Client
-					
-					mediator=Mediator
-					
-					payment=Payment
-					
-					'Contrat fais le ' date=DATE
-					' à ' town=STRING '.'
+	'contrat' name=ID
 ;
 
-Recipient:
-	'La société ' name=STRING
-	', au capital de ' capital=NEW_INT ' euros,'
-	'ayant son siège social au ' address=ADDRESS_TYPE 
-	'inscrite au registre du commerce et des sociétés de ' register=STRING ','
-	'sous le numéro ' siret=NEW_INT ', pris en la personne de son représentant légal, monsieur ' delegate=STRING '.'
-	"Ci-après désigné le prestataire d'identifiant blockchain " id=BLOCK_CHAIN_ID "."
+Declaration:
+	type_value=Integer_declaration|Date_declaration|Partie_declaration
 ;
 
-Client:
-	'La personne de nom ' name=STRING 
-	', et de prénom ' surname=STRING ', résidant au ' address=ADDRESS_TYPE '.'
-	"Ci-après désigné le client d'identifiant blockchain " id=BLOCK_CHAIN_ID "."
+Integer_declaration:
+	'entier' name=ID (value=INT)?
+;
+
+Date_declaration:
+	'date' name=ID (value=DATE)?
+;
+
+Partie_declaration:
+	'partie' name=ID (value=BLOCKCHAIN_ID)?
+;
+
+Sus_Res:
+	'droit' access=Access 'PEUT' name=('suspendre'|'reprendre')
+;
+
+Access:
+	partie+=ID ((and?='et' partie+=ID)+|(or?='ou' partie+=ID)*)
+;
+
+Fonction:
+	(auto?='auto')? 'exec' (access=Access|all?='tous')? 'PEUT' name=ID ':' corp+=(IF|EXPRESSION|A_D)+
+;
+
+IF:
+	'SI' CONDITION 'ALORS' corp+=(EXPRESSION|A_D)+ 'FIN' 'SI'
+;
+
+CONDITION:
+	date=(ID|DATE) 'passé'
+;
+
+EXPRESSION:
+	'ajoute' toadd=ID ('à'|'a') variable=ID
+	| 'date' dateToChange=ID 'dans' nbr=INT 'jours' (timeDirection=('après'|'avant') dateToRefer=(ID|DATE))?
+;
+
+A_D:
+	order=('active'|'desactive') fonction=ID
 ;
 
 
-Mediator:
-	'Le médiateur, nommé ' name=STRING ', est joignable ' c=(Address|Number) '.'
-;
+terminal DATE : ('0'..'9')('0'..'9')'/'('0'..'3')('0'..'9')'/'('1'..'9')('0'..'9')('0'..'9')('0'..'9');
 
-Address: "à l'adresse " contact=ADDRESS_TYPE;
-
-Number: "au numéro " contact=STRING;
-
-Payment:
-	'Le paiement de ' price=NEW_INT " euros sera réglé à chaque début du mois."
-;
-
-terminal NEW_INT : '"'('0'..'9')+'"';
-
-terminal DATE : ('1'..'9')+" "("Janvier"|"Février"|"Mars"|"Avril"|"Mai"|"Juin"|"Juillet"|"Août"|"Septembre"|"Octobre"|"Novembre"|"Décembre")" "('1'..'3')('0'..'9')('0'..'9')('0'..'9');
-
-terminal ADDRESS_TYPE: ('0'..'9')+" "("rue"|"avenue"|"boulevard"|"voie"|"impasse"|"chemin")" "('a'..'z'|'A'..'Z'|" "|"'"|"-"|"é"|"è"|"à")+" "('0'..'9')+" "('a'..'z'|'A'..'Z'|" "|"'"|"-"|"é"|"è"|"à")+;
-
-terminal BLOCK_CHAIN_ID : "0x"('0'..'9')*;
-
-terminal STRING_: ('a'..'z'|'A'..'Z'|" "|"'"|"-"|"é"|"è"|"à")+;
+terminal BLOCKCHAIN_ID : "0x"('0'..'9')*;
 

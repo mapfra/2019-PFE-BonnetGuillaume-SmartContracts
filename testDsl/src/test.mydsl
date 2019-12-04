@@ -1,22 +1,26 @@
-Contrat de prestation de service nommé "nomDuContrat".
-		Entre les soussignés : 	
+contrat nom_contrat
 
-La société "Renault SAS", au capital de "15" euros, 
-ayant son siège social au 15 rue Honore d'Urfee 42500 Le Chambon Feugerolles
-inscrite au registre du commerce et des sociétés de "Nanterre",
-sous le numéro "4567", pris en la personne de son représentant légal, monsieur 
-"Bernard Tapis".
-Ci-après désigné le prestataire d'identifiant blockchain 0x1234.
+entier prix 10
+entier majoration 1
 
-Et :
+date date_paiement 03/12/2019
+date date_defaut
 
-La personne de nom "Bonnet", et de prénom "Théo", résidant au 475 rue Evariste Gallois 06410 Biot.
-Ci-après désigné le client d'identifiant blockchain 0x89456.
+partie client 0x0125359
+partie prestataire 0x42968413
+partie oracle 0x48999
+
+droit prestataire ou client PEUT suspendre
+
+droit client et prestataire PEUT reprendre
 
 
+auto exec tous PEUT verifier_retard :
+	SI date_paiement passé ALORS 
+		ajoute majoration à prix
+		desactive verifier_retard
+	FIN SI
+	
+exec prestataire PEUT approuver_paiement :
+	date date_paiement dans 30 jours après date_paiement
 
-Le médiateur, nommé "Albert", est joignable à l'adresse 475 rue Evariste Gallois 06410 Biot.
-
-Le paiement de "15" euros sera réglé à chaque début du mois.
-
-Contrat fais le 15 Août 2015 à "Sophia Antipolis".
