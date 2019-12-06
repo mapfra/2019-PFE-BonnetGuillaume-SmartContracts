@@ -10,7 +10,18 @@ import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import com.google.inject.Inject
 import org.xtext.example.mydsl.myDsl.Contract
-
+import org.xtext.example.mydsl.myDsl.Model
+import org.xtext.example.mydsl.myDsl.Declaration
+import org.xtext.example.mydsl.myDsl.Sus_Res
+import org.xtext.example.mydsl.myDsl.Fonction
+import org.eclipse.emf.common.util.EList
+import org.xtext.example.mydsl.myDsl.Access
+import org.eclipse.emf.ecore.EObject
+import org.xtext.example.mydsl.myDsl.If
+import org.xtext.example.mydsl.myDsl.EXPRESSION
+import org.xtext.example.mydsl.myDsl.A_D
+import org.xtext.example.mydsl.myDsl.S_R
+import org.xtext.example.mydsl.myDsl.CONDITION
 
 /**
  * Generates code from your model files on save.
@@ -24,15 +35,201 @@ class MyDslGenerator extends AbstractGenerator {
 	@Inject extension IQualifiedNameProvider
 	
 	override doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
-		val contract = (resource.allContents.toIterable.filter(Contract)).get(0);
+		val model = (resource.allContents.toIterable.filter(Model)).get(0);
 		fsa.generateFile(
-			contract.name.toFirstUpper + ".sol",
-			contract.compile
+			model.contract.name.toFirstUpper + ".sol",
+			model.contract.compile(model)
 		)
 	}
 	
-	def compile (Contract c) '''
-		«c.name»;
+	def compile (Contract c, Model m) '''
+	pragma solidity >= 0.5.0 < 0.6.0;
+	
+	import "./DateTime.sol";
+	
+	contract «c.name.toFirstUpper»{
+	
+		«m.declarations.compileDeclarations»
+	
+		«compile_validators»
+	
+		«m.sus_res.compileSus_Reps»
+	
+		«m.fonctions.compileFonctions»
+	}
+	'''
+		
+	def compile_validators() '''
+		
+		bool private active = true;
+		modifier orValidator(address[] storage parties) {
+			for(uint i = 0; i < parties.length; ++i) {
+				if(msg.sender == parties[i]) {
+					_;
+					return;
+				}
+			}
+			revert();
+		}
+		
+		modifier isActive {
+			require(active);
+			_;
+		}
+		
+		modifier isInactive {
+			require(!active);
+			_;
+		}
+		
+		modifier andValidator(mapping(address => bool) storage _registre, address[] storage parties) {
+			for(uint i = 0; i < parties.length; ++i) {
+				if(msg.sender == parties[i]) {
+					_registre[parties[i]] = true;
+					break;
+				}
+			}
+		
+			for(uint i = 0; i < parties.length; ++i) {
+				if(_registre[parties[i]] == false) {
+					return;
+				}
+			}
+		
+			for(uint i = 0; i < parties.length; ++i) {
+				_registre[parties[i]] = false;
+			} 
+		
+			_;
+		}
+		
+	'''
+	
+	def compileDeclarations (EList<Declaration> declarations) '''
+		«FOR d : declarations»
+			«IF d.type=="entier"»
+				uint private «d.name» = «d.integer»;
+			«ENDIF»
+			«IF d.type=="date"»
+				DateTime private «d.name» ;
+			«ENDIF»
+			«IF d.type=="partie"»
+				address private «d.name» «IF d.partie !== null » = «d.partie»«ENDIF»;
+			«ENDIF»
+		«ENDFOR»
+		
+		constructor() public {
+			«FOR d : declarations»
+				«IF d.type=="date"»
+					«d.name» = new DateTime();
+					«IF d.date !== null »«d.name».toTimestamp(«Integer.parseInt(d.date.toString().split("/").get(2))», «Integer.parseInt(d.date.toString().split("/").get(1))», «Integer.parseInt(d.date.toString().split("/").get(0))»);
+					 «ENDIF»
+				«ENDIF»
+			«ENDFOR»
+		}
+	'''
+	
+	def compileSus_Reps (EList<Sus_Res> s_rs) '''
+		«FOR s_r : s_rs»
+			«s_r.access.precompileAccess(s_r.name)»
+			«IF s_r.name=="suspendre"»
+				function suspend() public «s_r.access.compileAccess(s_r.name)» isActive{
+					active = false;
+				}
+			«ELSE»
+				function resume() public «s_r.access.compileAccess(s_r.name)» isInactive{
+					active = true;
+				}
+			«ENDIF»
+		«ENDFOR»
+	'''
+		
+	def precompileAccess(Access access, String f_name) '''
+	
+		address[] «f_name»_rule  = [«access.partie.get(0)»«FOR p : access.partie.subList(1,access.partie.size())», «p»«ENDFOR»];
+		
+		«IF access.and»
+			mapping(address => bool) public «f_name»_state;
+		«ENDIF»
+	'''
+	
+	def compileAccess(Access access, String f_name) '''
+		«IF access.and»
+			andValidator(«f_name»_state , «f_name»_rule)
+		«ELSE»
+			orValidator(«f_name»_rule)
+		«ENDIF»
 	'''
 
+	def compileFonctions (EList<Fonction> fs) '''
+		«FOR f : fs»
+			bool active_«f.name» = true;
+			«IF !f.all»
+				«f.access.precompileAccess(f.name)»
+				function «f.name»() public «f.access.compileAccess(f.name)» isActive{
+			«ELSE»
+				function «f.name»() public isActive {
+			«ENDIF»
+				require(active_«f.name»);
+				«f.corp.compileCorp»
+			}
+		«ENDFOR»
+	'''
+	
+	def compileCorp (EList<EObject> cs) '''
+		«FOR c : cs»
+			«IF c instanceof If»
+				«c.compileIf»
+			«ENDIF»
+			«IF c instanceof EXPRESSION»
+				«c.compileExpression»
+			«ENDIF»
+			«IF c instanceof A_D»
+				«c.compileA_D»
+			«ENDIF»
+			«IF c instanceof S_R»
+				«c.compileS_R»
+			«ENDIF»
+		«ENDFOR»
+	'''
+	
+	def compileA_D(A_D a_d)'''
+		«IF a_d.order=="active"»
+			active_«a_d.fonction» = true;
+		«ELSE»
+			active_«a_d.fonction» = false;
+		«ENDIF»
+	'''
+	
+	def compileS_R(S_R s_r) '''
+		«IF s_r.name=="reprendre"»
+			active = true;
+		«ELSE»
+			active = false;
+		«ENDIF»
+	'''
+	
+	def compileExpression(EXPRESSION e) '''
+		«IF e.add»
+			«e.variable» += «e.toadd»;
+		«ENDIF»
+		«IF e.changeDate»
+			«IF e.after»
+				«e.dateToChange» = «e.dateToRefer»;
+			«ELSE»
+				«e.dateToChange».parseTimestamp(now);
+			«ENDIF»
+			«e.dateToChange».addDays(«e.nbr»);
+		«ENDIF»
+	'''
+	
+	def compileIf(If i)'''
+		if («i.condition.compileCondition») {
+			«i.corp.compileCorp»
+		}
+	'''
+	
+	def compileCondition(CONDITION c)'''
+		«c.date».passed()
+	'''
 }
