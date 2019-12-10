@@ -102,6 +102,8 @@ build/
 org.eclipse.buildship.core.prefs
 .DS_Store
 
+*org.xtext.example.mydsl.*
+
 #########################################
 #		GANACHE			#
 #########################################
@@ -111,4 +113,15 @@ org.eclipse.buildship.core.prefs
 .cache-main
 .scala_dependencies
 .worksheet
+
+#########################################
+#		MODEL			#
+#########################################
+
+Model/org*
+Model/LegalSC/src*
+
+
+
+
 
