@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/LegalSC/src" modelPluginID="LegalSC" modelName="LegalSC"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="8.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>LegalSC.ecore</foreignModel>
+  <genPackages prefix="LegalSC" disposableProviderFactory="true" ecorePackage="LegalSC.ecore#/">
+    <genClasses ecoreClass="LegalSC.ecore#//Contrat">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Contrat/entete"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Contrat/clausesection"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Contrat/nom"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Entete">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/prix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/date_debut"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/date_fin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/objet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Entete/partie"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//ClauseSection">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//ClauseSection/clause"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//ClauseSection/nom"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Clause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Clause/nom"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Clause/texte"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Clause/execution"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Clause/variable"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Partie">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Partie/nom"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Partie/adresse"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Partie/role"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/nom"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/valeur"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Execution">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/sialors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/expression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Execution/droitAcces"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//SiAlors">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Condition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Condition/condition"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//Expression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Expression/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
