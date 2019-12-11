@@ -35,8 +35,8 @@ EFloat returns ecore::EFloat:
 
 Partie returns Partie:
 	'Partie' nom=EString
-		'adresse' adresse=EString
-		'role' role=EString
+		'adresse' adresse=blockchain_adress
+		'role' role=('Client'|'Prestataire')
 	;
 
 Clause returns Clause:
@@ -47,12 +47,14 @@ Clause returns Clause:
 
 Execution returns Execution:
 	(automatique?='auto')? 'Execution'
-		droit+=droit ((operateurLogique='et' droit+=droit)+|(operateurLogique='ou' droit+=droit)+)?
+		droit+=Droit ((operateurLogique='et' droit+=Droit)+|(operateurLogique='ou' droit+=Droit)+)?
 		'PEUT'
-		((sialors+=SiAlors)
-		| (expression+=Expression))*
-		 
+		(executable+=Executable)*
 	;
+	
+Executable returns Executable :
+	SiAlors | Expression
+;
 
 Variable returns Variable:
 		
@@ -62,7 +64,7 @@ Variable returns Variable:
 	;
 
 terminal blockchain_adress returns ecore::EString :
-	'0x'('0'..'9')+
+	'0x'('0'..'9'|'a'..'f'|'A'..'F')+
 ;
 
 terminal date returns ecore::EString :
@@ -77,7 +79,7 @@ SiAlors returns SiAlors:
 		(sialors+=SiAlors))*
 	'FinSi';
 
-droit returns droit:
+Droit returns Droit:
 	parties=ID;
 
 Condition returns Condition:

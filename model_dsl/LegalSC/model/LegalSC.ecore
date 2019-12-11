@@ -41,17 +41,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Execution">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sialors" upperBound="-1"
-        eType="#//SiAlors" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
-        eType="#//Expression" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="droit" lowerBound="1" upperBound="-1"
-        eType="#//droit" containment="true"/>
+        eType="#//Droit" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operateurLogique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="automatique" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="False"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executable" upperBound="-1"
+        eType="#//Executable" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SiAlors">
+  <eClassifiers xsi:type="ecore:EClass" name="SiAlors" eSuperTypes="#//Executable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
         eType="#//Condition" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" upperBound="-1"
@@ -63,7 +61,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" eSuperTypes="#//Executable"/>
   <eClassifiers xsi:type="ecore:EClass" name="ActiveDesactive" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="action" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -81,8 +79,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="date_base" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NumChange" eSuperTypes="#//ChangeVariable"/>
-  <eClassifiers xsi:type="ecore:EClass" name="droit">
+  <eClassifiers xsi:type="ecore:EClass" name="Droit">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parties" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Executable" abstract="true"/>
 </ecore:EPackage>
