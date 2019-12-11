@@ -6,8 +6,8 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Contrat returns Contrat:
 	'Contrat' nom=EString
-		'entete' entete=Entete
-		'clausesection' clausesection+=ClauseSection (clausesection+=ClauseSection)* 
+		entete=Entete
+		clausesection+=ClauseSection (clausesection+=ClauseSection)* 
 	;
 
 
@@ -22,12 +22,12 @@ Entete returns Entete:
 		'date_debut' date_debut=EString
 		('date_fin' date_fin=EString)?
 		'objet' objet=EString
-		'partie' partie+=Partie ( partie+=Partie)* 
+		partie+=Partie ( partie+=Partie)+
 	;
 
 ClauseSection returns ClauseSection:
 	'Section' nom=EString
-		'clause' clause+=Clause ( clause+=Clause)*  
+		clause+=Clause ( clause+=Clause)*  
 	;
 
 EString returns ecore::EString:
@@ -45,68 +45,55 @@ Partie returns Partie:
 Clause returns Clause:
 	'Clause' nom=EString
 		'texte' texte=EString
-		('execution' execution=Execution)?
-		('variable' variable+=Variable (variable+=Variable)*)?
+		(execution=Execution)?
+		(variable+=Variable (variable+=Variable)*)?
 	;
 
 Execution returns Execution:
 	'Execution'
 		droit+=droit ((operateurLogique='et' droit+=droit)+|(operateurLogique='ou' droit+=droit)+)?
-		((sialors+=SiAlors (sialors+=SiAlors)*)?
-		| ('expression' expression+=Expression (expression+=Expression)*)?)*
+		'PEUT'
+		((sialors+=SiAlors)
+		| (expression+=Expression))*
 		 
 	;
 
 Variable returns Variable:
-	'Variable'
-	'{'
-		'type' type=EString
-		'nom' nom=EString
-		'valeur' valeur=EString
-	'}';
+		type=('date'|'nombre'|'adresse')
+		nom=EString
+		('=' valeur=EString)?
+	;
 
 SiAlors returns SiAlors:
-	'SiAlors'
-	'{'
-		'condition' condition=Condition
-		('expression' '{' expression+=Expression ( "," expression+=Expression)* '}' )?
-		('sialors' '{' sialors+=SiAlors ( "," sialors+=SiAlors)* '}' )?
-	'}';
+	'Si'
+		condition=Condition
+	'Alors'
+		((expression+=Expression)|
+		(sialors+=SiAlors))*
+	'FinSi';
 
 droit returns droit:
-	'droit'
-	'{'
-		'parties' parties=EString
-	'}';
+	parties=ID;
 
 Condition returns Condition:
-	'Condition'
-	'{'
-		'condition' condition=EString
-	'}';
+	condition=EString 'passe'
+	;
 
 ActiveDesactive returns ActiveDesactive:
-	'ActiveDesactive'
-	'{'
-		'action' action=EString
-		'nom_clause_ou_contract' nom_clause_ou_contract=EString
-	'}';
+	action=('active'|'desactive')
+	nom_clause_ou_contract=ID
+	;
 
 DateChange returns DateChange:
-	'DateChange'
-	'{'
-		'var_a_change' var_a_change=EString
-		'decalage' decalage=EInt
-		'unite' unite=EString
-		('date_base' date_base=EString)?
-	'}';
+	'decale' var_a_change=EString
+		'après' decalage=EInt
+		unite=('jours'|'jour')
+		('a' 'partir' 'de' date_base=EString)?
+	;
 
 NumChange returns NumChange:
-	'NumChange'
-	'{'
-		'var_a_change' var_a_change=EString
-		'decalage' decalage=EInt
-	'}';
+	'ajoute' decalage=EInt ('a'|'à') var_a_change=EString
+	;
 
 EInt returns ecore::EInt:
 	'-'? INT;
