@@ -84,7 +84,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="int_change" eSuperTypes="#//Change_variable"/>
   <eClassifiers xsi:type="ecore:EClass" name="droit_sus_res">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parties" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList" transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operateur_logique" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
