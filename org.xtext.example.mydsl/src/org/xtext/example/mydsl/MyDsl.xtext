@@ -5,7 +5,7 @@ import "http://LSC/1.0"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 Contrat returns Contrat:
-	'Contrat' nom=EString
+	'Contrat' nom=ID
 		entete=Entete
 		clausesection+=ClauseSection (clausesection+=ClauseSection)* 
 	;
@@ -17,7 +17,7 @@ Expression returns Expression:
 
 Entete returns Entete:
 	'Entete'
-		'date_debut' date_debut=EString
+		'date_debut' date_debut=date
 		partie+=Partie ( partie+=Partie)+
 		(variable+=Variable (variable+=Variable)*)?
 	;
@@ -31,7 +31,7 @@ EString returns ecore::EString:
 	STRING | ID;
 
 EFloat returns ecore::EFloat:
-	'-'? INT? '.' INT;
+	'-'? INT? ('.' INT)?;
 
 Partie returns Partie:
 	'Partie' nom=EString
@@ -40,13 +40,13 @@ Partie returns Partie:
 	;
 
 Clause returns Clause:
-	'Clause' nom=EString
+	'Clause' nom=ID
 		'texte' texte=EString
 		(execution=Execution)?
 	;
 
 Execution returns Execution:
-	'Execution'
+	(automatique?='auto')? 'Execution'
 		droit+=droit ((operateurLogique='et' droit+=droit)+|(operateurLogique='ou' droit+=droit)+)?
 		'PEUT'
 		((sialors+=SiAlors)
@@ -56,10 +56,18 @@ Execution returns Execution:
 
 Variable returns Variable:
 		
-		(type='date' nom=EString ('=' date=EString)?)|
-		(type='nombre' nom=EString ('=' entier=EInt)?) |
-		(type='adresse' nom=EString ('=' adresse=EString))
+		(type='date' nom=EString ('=' date=date)?)|
+		(type='nombre' nom=EString ('=' nombre=EFloat)?) |
+		(type='adresse' nom=EString ('=' adresse=blockchain_adress))
 	;
+
+terminal blockchain_adress returns ecore::EString :
+	'0x'('0'..'9')+
+;
+
+terminal date returns ecore::EString :
+	('0'..'9')('0'..'9')'/'('0'..'9')('0'..'9')'/'('0'..'9')('0'..'9')('0'..'9')('0'..'9')
+;
 
 SiAlors returns SiAlors:
 	'Si'

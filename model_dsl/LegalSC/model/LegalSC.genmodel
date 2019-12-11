@@ -34,13 +34,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/nom"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/date"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/adresse"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/entier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/nombre"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//Execution">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/sialors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/expression"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/droit"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Execution/operateurLogique"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Execution/automatique"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//SiAlors">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/condition"/>
