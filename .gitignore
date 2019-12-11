@@ -118,10 +118,11 @@ org.eclipse.buildship.core.prefs
 #		MODEL			#
 #########################################
 
-Model/org*
-Model/LegalSC/src*
+model_dsl/org*
+model_dsl/LegalSC/src*
 
 
-
-
+other
+node_modules
+package-lock.json
 
