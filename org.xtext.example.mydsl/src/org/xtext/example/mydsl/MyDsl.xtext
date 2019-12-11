@@ -80,7 +80,7 @@ SiAlors returns SiAlors:
 	'FinSi';
 
 Droit returns Droit:
-	parties=ID;
+	parties=('Client'|'Prestataire');
 
 Condition returns Condition:
 	condition=EString 'passe'

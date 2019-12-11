@@ -16,6 +16,8 @@ import LegalSC.Partie
 import LegalSC.Execution
 import LegalSC.Droit
 import LegalSC.Executable
+import LegalSC.SiAlors
+import LegalSC.Expression
 
 /**
  * Generates code from your model files on save.
@@ -88,7 +90,6 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(Clause c) '''
-		«»
 		bool active_«c.nom» = true ;
 		«c.execution.compile(c.nom)»
 	'''
@@ -104,6 +105,22 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(Executable e) '''
+		«»
+		«IF e instanceof SiAlors»
+			«(e.compileSiAlors)»
+		«ENDIF»
+		«IF e instanceof Expression»
+			«e.compileExpression»
+		«ENDIF»	
+	'''
+	
+	def compileSiAlors(SiAlors sa) '''
+		if () {
+			//todo finish if then else
+		}
+	'''
+	
+	def compileExpression(Expression e) '''
 	
 	'''
 	
