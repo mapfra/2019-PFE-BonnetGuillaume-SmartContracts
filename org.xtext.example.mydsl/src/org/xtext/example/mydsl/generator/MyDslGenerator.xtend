@@ -18,6 +18,7 @@ import LegalSC.Droit
 import LegalSC.Executable
 import LegalSC.SiAlors
 import LegalSC.Expression
+import LegalSC.Condition
 
 /**
  * Generates code from your model files on save.
@@ -105,7 +106,6 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(Executable e) '''
-		«»
 		«IF e instanceof SiAlors»
 			«(e.compileSiAlors)»
 		«ENDIF»
@@ -115,13 +115,20 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileSiAlors(SiAlors sa) '''
-		if () {
-			//todo finish if then else
+		«»
+		if («sa.condition.compile») {
+			«FOR e : sa.executable»
+			«e.compile»
+			«ENDFOR»
 		}
 	'''
 	
-	def compileExpression(Expression e) '''
+	def compile(Condition c) '''
+		«c.condition».passed()
+	'''
 	
+	def compileExpression(Expression e) '''
+		expression
 	'''
 	
 	def precompile(Droit[] d, String name, String operator)'''

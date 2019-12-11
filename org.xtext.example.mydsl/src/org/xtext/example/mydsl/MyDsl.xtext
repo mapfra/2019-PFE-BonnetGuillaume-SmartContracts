@@ -49,7 +49,7 @@ Execution returns Execution:
 	(automatique?='auto')? 'Execution'
 		droit+=Droit ((operateurLogique='et' droit+=Droit)+|(operateurLogique='ou' droit+=Droit)+)?
 		'PEUT'
-		(executable+=Executable)*
+		(executable+=Executable)+
 	;
 	
 Executable returns Executable :
@@ -58,7 +58,7 @@ Executable returns Executable :
 
 Variable returns Variable:
 		
-		(type='date' nom=EString ('=' date=date)?)|
+		(type='date' nom=EString ('=' date=date)?)|		//todo deal with date
 		(type='nombre' nom=EString ('=' nombre=EFloat)?) |
 		(type='adresse' nom=EString ('=' adresse=blockchain_adress))
 	;
@@ -75,8 +75,7 @@ SiAlors returns SiAlors:
 	'Si'
 		condition=Condition
 	'Alors'
-		((expression+=Expression)|
-		(sialors+=SiAlors))*
+		(executable+=Executable)+
 	'FinSi';
 
 Droit returns Droit:

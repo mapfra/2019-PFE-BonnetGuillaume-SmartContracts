@@ -44,8 +44,7 @@
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//SiAlors">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/expression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/sialors"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/executable"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//Condition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Condition/condition"/>
