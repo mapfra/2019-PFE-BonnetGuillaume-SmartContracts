@@ -45,12 +45,24 @@
     <genClasses ecoreClass="LegalSC.ecore#//SiAlors">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/condition"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/sialors"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//Condition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Condition/condition"/>
     </genClasses>
-    <genClasses ecoreClass="LegalSC.ecore#//Expression">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Expression/expression"/>
+    <genClasses ecoreClass="LegalSC.ecore#//Expression"/>
+    <genClasses ecoreClass="LegalSC.ecore#//ActiveDesactive">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//ActiveDesactive/action"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//ActiveDesactive/nom_clause_ou_contract"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="LegalSC.ecore#//ChangeVariable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//ChangeVariable/var_a_change"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//ChangeVariable/decalage"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//DateChange">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//DateChange/unite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//DateChange/date_base"/>
+    </genClasses>
+    <genClasses ecoreClass="LegalSC.ecore#//NumChange"/>
   </genPackages>
 </genmodel:GenModel>
