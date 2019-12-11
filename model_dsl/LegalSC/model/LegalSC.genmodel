@@ -11,11 +11,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Contrat/nom"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//Entete">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/prix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/date_debut"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/date_fin"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Entete/objet"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Entete/partie"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Entete/variable"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//ClauseSection">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//ClauseSection/clause"/>
@@ -25,7 +23,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Clause/nom"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Clause/texte"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Clause/execution"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Clause/variable"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//Partie">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Partie/nom"/>
@@ -35,7 +32,9 @@
     <genClasses ecoreClass="LegalSC.ecore#//Variable">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/nom"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/valeur"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/adresse"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Variable/entier"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//Execution">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/sialors"/>

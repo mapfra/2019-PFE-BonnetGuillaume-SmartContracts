@@ -27,6 +27,9 @@ class MyDslFormatter extends AbstractFormatter2 {
 		for (partie : entete.partie) {
 			partie.format
 		}
+		for (variable : entete.variable) {
+			variable.format
+		}
 	}
 	
 	// TODO: implement for ClauseSection, Clause, Execution, SiAlors

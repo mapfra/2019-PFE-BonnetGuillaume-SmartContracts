@@ -15,14 +15,11 @@ Expression returns Expression:
 	ActiveDesactive | DateChange | NumChange;
 
 
-
 Entete returns Entete:
 	'Entete'
-		'prix' prix=EFloat
 		'date_debut' date_debut=EString
-		('date_fin' date_fin=EString)?
-		'objet' objet=EString
 		partie+=Partie ( partie+=Partie)+
+		(variable+=Variable (variable+=Variable)*)?
 	;
 
 ClauseSection returns ClauseSection:
@@ -46,7 +43,6 @@ Clause returns Clause:
 	'Clause' nom=EString
 		'texte' texte=EString
 		(execution=Execution)?
-		(variable+=Variable (variable+=Variable)*)?
 	;
 
 Execution returns Execution:
@@ -59,9 +55,10 @@ Execution returns Execution:
 	;
 
 Variable returns Variable:
-		type=('date'|'nombre'|'adresse')
-		nom=EString
-		('=' valeur=EString)?
+		
+		(type='date' nom=EString ('=' date=EString)?)|
+		(type='nombre' nom=EString ('=' entier=EInt)?) |
+		(type='adresse' nom=EString ('=' adresse=EString))
 	;
 
 SiAlors returns SiAlors:
