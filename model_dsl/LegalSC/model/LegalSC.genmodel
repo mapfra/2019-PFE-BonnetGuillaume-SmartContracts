@@ -40,7 +40,8 @@
     <genClasses ecoreClass="LegalSC.ecore#//Execution">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/sialors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/expression"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Execution/droitAcces"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//Execution/droit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//Execution/operateurLogique"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//SiAlors">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference LegalSC.ecore#//SiAlors/condition"/>
@@ -64,5 +65,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//DateChange/date_base"/>
     </genClasses>
     <genClasses ecoreClass="LegalSC.ecore#//NumChange"/>
+    <genClasses ecoreClass="LegalSC.ecore#//droit">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LegalSC.ecore#//droit/parties"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>
