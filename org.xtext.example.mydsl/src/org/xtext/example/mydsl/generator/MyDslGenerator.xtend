@@ -19,6 +19,9 @@ import LegalSC.Executable
 import LegalSC.SiAlors
 import LegalSC.Expression
 import LegalSC.Condition
+import LegalSC.ActiveDesactive
+import LegalSC.DateChange
+import LegalSC.NumChange
 
 /**
  * Generates code from your model files on save.
@@ -38,20 +41,33 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def compile(Contrat c) '''
 		«»
+		pragma solidity >= 0.5.0 < 0.6.0;
+		import "./DateTime.sol";
+		
 		contrat «c.nom» {
 			«c.entete.compile»
 			
 			«generateValidators()»
 			
-			constructor(string memory _pdfHash) public {
-				pdfHash = _pdfHash;
-				reactivate_will[recipient] = false;
-				reactivate_will[client] = false;
-			}
+			«compileConstructor(c.entete)»
 		
 			«FOR s : c.clausesection»
 				«s.compile»
 			«ENDFOR»
+		}
+	'''
+	
+	def compileConstructor(Entete e) '''
+		constructor(string memory _pdfHash) public {
+			pdfHash = _pdfHash;
+		«FOR v : e.variable»
+			«IF v.type=="date"»
+				«v.nom» = new DateTime();
+				«IF v.date !== null »
+				«v.nom».toTimestamp(«Integer.parseInt(v.date.toString().split("/").get(2))», «Integer.parseInt(v.date.toString().split("/").get(1))», «Integer.parseInt(v.date.toString().split("/").get(0))»);
+				 «ENDIF»
+			«ENDIF»
+		«ENDFOR»
 		}
 	'''
 	
@@ -74,7 +90,7 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def compile(Variable v) '''
 		«IF v.type==='date'»
-			uint private «v.nom» «IF v.date!==null»= «v.date» «ENDIF»;
+			DateTime private «v.nom» ;
 		«ENDIF»
 		«IF v.type==='nombre'»
 			uint private «v.nom» = «v.nombre» ;
@@ -128,7 +144,37 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileExpression(Expression e) '''
-		expression
+		«IF e instanceof ActiveDesactive»
+			«(e.compileActiveDesactive)»
+		«ENDIF»
+		«IF e instanceof DateChange»
+			«e.compileDateChange»
+		«ENDIF»	
+		«IF e instanceof NumChange»
+			«e.compileNumChange»
+		«ENDIF»	
+	'''
+	
+	def compileActiveDesactive(ActiveDesactive ad)'''
+		«IF ad.action=="active"»
+			active_«ad.nom_clause_ou_contract» = true;
+		«ELSE»
+			active_«ad.nom_clause_ou_contract» = false;
+		«ENDIF»
+	'''
+	
+	def compileDateChange(DateChange dc)'''
+		«IF dc.date_base===null»
+			«dc.var_a_change» = «dc.date_base»;
+		«ELSE»
+			«dc.var_a_change».parseTimestamp(now);
+		«ENDIF»
+		
+		«dc.var_a_change».addDays(«dc.decalage»);
+	'''
+	
+	def compileNumChange(NumChange nc)'''
+		«nc.var_a_change» += «nc.decalage»;
 	'''
 	
 	def precompile(Droit[] d, String name, String operator)'''
