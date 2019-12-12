@@ -8,7 +8,7 @@ class PdfGenerator {
 	def public static void pdfGenerate(Resource resource, IFileSystemAccess2 fsa){
 		val c = resource.allContents.toIterable.filter(Contrat).get(0)
 		fsa.generateFile(
-			c.nom + ".tex",
+			c.nom.toFirstUpper + ".tex",
 			c.compile)
 	}
 	

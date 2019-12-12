@@ -33,9 +33,10 @@ class MyDslGenerator extends AbstractGenerator {
 
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		PdfGenerator.pdfGenerate(resource, fsa);
+		MigratorGenerator.migratorGenerate(resource, fsa);
 		val c = resource.allContents.toIterable.filter(Contrat).get(0)
 		fsa.generateFile(
-			c.nom + ".sol",
+			c.nom.toFirstUpper + ".sol",
 			c.compile)
 	}
 	
