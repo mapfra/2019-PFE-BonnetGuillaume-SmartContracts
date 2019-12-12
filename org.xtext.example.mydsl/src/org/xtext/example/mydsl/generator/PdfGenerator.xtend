@@ -3,6 +3,7 @@ package org.xtext.example.mydsl.generator
 import org.eclipse.emf.ecore.resource.Resource
 import LegalSC.Contrat
 import org.eclipse.xtext.generator.IFileSystemAccess2
+import LegalSC.Entete
 
 class PdfGenerator {
 	def public static void pdfGenerate(Resource resource, IFileSystemAccess2 fsa){
@@ -26,19 +27,7 @@ class PdfGenerator {
 				\title{Entre les soussignés}
 				\\
 				
-				La société <NOM SOCIETE>, au capital de <INT> euros, ayant son siège social au <ADRESSE> inscrite au Registre du commerce et des sociétés de <VILLE DE REGISTRE> sous le numéro <NUMERO SIRET>, pris en la personne de son représentant légal, MONSIEUR <NOM REPRESENTANT>. \\
-				
-				Ci-après désigné "le Prestataire" \\ 
-				
-				D’une part,\\
-				
-				Et :\\
-				
-				<PRENOM CLIENT>, <NOM CLIENT>, <ADRESSE CLIENT>\\
-				
-				Ci-après désigné "le Client"\\
-				
-				D’autre part,\\
+				«c.entete.compile»
 				
 				\section{Dispositions générales}
 				\subsection{Acceptation des conditions générales}
@@ -255,4 +244,28 @@ class PdfGenerator {
 				
 				\end{document}
 	'''
+	
+	def static compile(Entete e) '''
+		
+		«FOR p : e.partie»
+			«IF p.role === "Prestataire"»
+				La société <NOM SOCIETE>, au capital de <INT> euros, ayant son siège social au <ADRESSE> inscrite au Registre du commerce et des sociétés de <VILLE DE REGISTRE> sous le numéro <NUMERO SIRET>, pris en la personne de son représentant légal, MONSIEUR <NOM REPRESENTANT>. \\
+						
+				Ci-après désigné "le Prestataire" \\ 
+						
+				D’une part,\\
+			«ENDIF»
+		«ENDFOR»
+		Et :\\
+		«FOR p : e.partie»
+			«IF p.role === "Client"»
+				<PRENOM CLIENT>, <NOM CLIENT>, <ADRESSE CLIENT>\\
+				
+				Ci-après désigné "le Client"\\
+				
+				D’autre part,\\
+			«ENDIF»
+		«ENDFOR»
+	'''
+	
 }

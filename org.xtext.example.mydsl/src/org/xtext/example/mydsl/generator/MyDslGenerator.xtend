@@ -45,10 +45,10 @@ class MyDslGenerator extends AbstractGenerator {
 		pragma solidity >= 0.5.0 < 0.6.0;
 		import "./DateTime.sol";
 		
-		contrat «c.nom» {
-			«c.entete.compile»
+		contract «c.nom.toFirstUpper» {
+			«c.entete.compile(c.nom)»
 			
-			«generateValidators()»
+			«generateValidators(c.nom)»
 			
 			«compileConstructor(c.entete)»
 		
@@ -60,6 +60,8 @@ class MyDslGenerator extends AbstractGenerator {
 	
 	def compileConstructor(Entete e) '''
 		constructor(string memory _pdfHash) public {
+			date_debut = new DateTime();
+			date_debut.toTimestamp(«Integer.parseInt(e.date_debut.toString().split("/").get(2))», «Integer.parseInt(e.date_debut.toString().split("/").get(1))», «Integer.parseInt(e.date_debut.toString().split("/").get(0))»);
 			pdfHash = _pdfHash;
 		«FOR v : e.variable»
 			«IF v.type=="date"»
@@ -73,10 +75,10 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	
-	def compile(Entete e) '''
-		bool private active = true;
+	def compile(Entete e, String name) '''
+		bool private active_«name.toLowerCase» = true;
 		string private pdfHash ;
-		uint private date_debut = «e.date_debut» ;
+		DateTime private date_debut ;
 		«FOR p : e.partie»
 			«p.compile»
 		«ENDFOR»
@@ -90,13 +92,13 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compile(Variable v) '''
-		«IF v.type==='date'»
+		«IF v.type=='date'»
 			DateTime private «v.nom» ;
 		«ENDIF»
-		«IF v.type==='nombre'»
-			uint private «v.nom» = «v.nombre» ;
+		«IF v.type=='nombre'»
+			uint private «v.nom» = « (Float.parseFloat(v.nombre.toString()).intValue*100).toString()» ;
 		«ENDIF»
-		«IF v.type==='adresse'»
+		«IF v.type=='adresse'»
 			address private «v.nom» «IF v.adresse!==null»= «v.adresse» «ENDIF»;
 		«ENDIF»
 	'''
@@ -165,7 +167,7 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileDateChange(DateChange dc)'''
-		«IF dc.date_base===null»
+		«IF dc.date_base===""»
 			«dc.var_a_change» = «dc.date_base»;
 		«ELSE»
 			«dc.var_a_change».parseTimestamp(now);
@@ -175,11 +177,11 @@ class MyDslGenerator extends AbstractGenerator {
 	'''
 	
 	def compileNumChange(NumChange nc)'''
-		«nc.var_a_change» += «nc.decalage»;
+		«nc.var_a_change» += «(Float.parseFloat(nc.decalage.toString()).intValue*100).toString()»;
 	'''
 	
 	def precompile(Droit[] d, String name, String operator)'''
-		address «name»_rule = [«d.get(0).parties» «FOR p : d.subList(1,d.size())», «p.parties»«ENDFOR»];
+		address[] «name»_rule = [«d.get(0).parties» «FOR p : d.subList(1,d.size())», «p.parties»«ENDFOR»];
 		
 		«IF operator==='et'»
 			mapping(address => bool) public «name»_state;
@@ -194,14 +196,14 @@ class MyDslGenerator extends AbstractGenerator {
 		«ENDIF»
 	'''
 	
-	def generateValidators() '''
+	def generateValidators(String name) '''
 		modifier isActive {
-					require(active);
+					require(active_«name.toLowerCase»);
 					_;
 				}
 				
 				modifier isInactive {
-					require(!active);
+					require(!active_«name.toLowerCase»);
 					_;
 				}
 				modifier orValidator(address[] storage parties) {
