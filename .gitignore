@@ -120,12 +120,14 @@ org.eclipse.buildship.core.prefs
 
 model_dsl/org*
 model_dsl/LegalSC/src*
+model_dsl/unice*
+!model_dsl/unice.xtext.pfe.legalsc/src
 
 
 other
 node_modules
 package-lock.json
-runtime-EclipseXtext
+runtime*
 
 
 .metadata
@@ -184,3 +186,4 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
