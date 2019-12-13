@@ -125,4 +125,4 @@ model_dsl/LegalSC/src*
 other
 node_modules
 package-lock.json
-
+runtime-EclipseXtext
