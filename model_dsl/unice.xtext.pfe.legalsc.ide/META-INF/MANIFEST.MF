@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: unice.xtext.pfe.legalsc.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: unice.xtext.pfe.legalsc.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: unice.xtext.pfe.legalsc.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: unice.xtext.pfe.legalsc,
+ LegalSC,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: unice.xtext.pfe.legalsc.ide.contentassist.antlr.internal,
+ unice.xtext.pfe.legalsc.ide.contentassist.antlr
