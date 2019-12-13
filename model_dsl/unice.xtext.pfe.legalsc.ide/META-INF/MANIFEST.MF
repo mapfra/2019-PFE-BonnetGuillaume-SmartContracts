@@ -11,6 +11,6 @@ Require-Bundle: unice.xtext.pfe.legalsc,
  org.eclipse.xtext.ide,
  org.eclipse.xtext.xbase.ide,
  org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: unice.xtext.pfe.legalsc.ide.contentassist.antlr.internal,
  unice.xtext.pfe.legalsc.ide.contentassist.antlr
