@@ -1,0 +1,36 @@
+Blockchains for SC
+
+Main usage : 
+    - Decentralization
+    - Code execution as transaction.
+    - Integrity of the transactions.
+    - Automatisation and speed.
+    - QUest to build a Digital world.
+    - No trust on a 3th actor (extern actor).   
+ 
+Main problems :
+    - Legal environement.
+    - Trust on the system / security.
+    - Performance.
+    - Cost.
+    - Interoperabillity (Blocksys ?).
+    - Trust on currency ? How to pay and be paid ? Financial issue.
+    - Success or fail of the operation ?
+    - Time gestion ?
+        --> https://blog.cotten.io/timing-future-events-in-ethereum-5fbbb91264e7
+
+Types :
+    - Public / private.
+    - Proof of Work / Stake.
+    - SC creation (Must Have).
+    - Actors.
+    - Cost.
+    - Performance.
+    - Currency.
+    - Features for SC.
+
+
+HYPERLEDGER
+
+https://blockchainflashnews.com/blockchain-technology-problems
+https://medium.com/evan-network/public-vs-private-vs-consortium-blockchains-3ad180d1e74
