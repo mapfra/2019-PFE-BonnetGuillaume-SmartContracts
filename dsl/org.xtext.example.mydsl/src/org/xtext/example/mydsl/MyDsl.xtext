@@ -1,0 +1,59 @@
+grammar org.xtext.example.mydsl.MyDsl with org.eclipse.xtext.common.Terminals
+
+generate myDsl "http://www.xtext.org/example/mydsl/MyDsl"
+
+Model:
+	contract=Contract 
+	(declarations+=Declaration)* 
+	(sus_res+=Sus_Res)* 
+	(fonctions+=Fonction)*;
+
+Contract:
+	'contrat' name=ID
+;
+
+Declaration:
+	(type='entier' name=ID (integer=INT)?)
+	| (type='date' name=ID (date=DATE)?)
+	| (type='partie' name=ID (partie=BLOCKCHAIN_ID)?)
+;
+
+Sus_Res:
+	'droit' access=Access 'PEUT' name=('suspendre'|'reprendre')
+;
+
+Access:
+	partie+=ID ((and?='et' partie+=ID)+|(or?='ou' partie+=ID)*)
+;
+
+Fonction:
+	(auto?='auto')? 'exec' (access=Access|all?='tous')? 'PEUT' name=ID ':' corp+=(If|EXPRESSION|A_D|S_R)+
+;
+
+S_R:
+	name=('suspendre'|'reprendre')
+;
+
+If:
+	'SI' condition=CONDITION 'ALORS' corp+=(EXPRESSION|A_D|S_R)+ 'FIN' 'SI'
+;
+
+CONDITION:
+	date=(ID) 'passé'
+;
+
+EXPRESSION:
+	add?='ajoute' toadd=ID ('à'|'a') variable=ID
+	| changeDate?='date' dateToChange=ID 'dans' nbr=INT 'jours' (after?=('après') dateToRefer=(ID))?
+;
+
+A_D:
+	order=('active'|'desactive') fonction=ID
+;
+
+
+terminal DATE : ('0'..'3')('0'..'9')'/'('0'..'1')('0'..'9')'/'('1'..'9')('0'..'9')('0'..'9')('0'..'9');
+
+terminal BLOCKCHAIN_ID : "0x"('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')('0'..'9'|'A'..'F'|'a'..'f')
+	
+;

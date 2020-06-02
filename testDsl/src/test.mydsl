@@ -1,0 +1,35 @@
+contrat name
+
+entier prix 10
+entier majoration
+
+date date_paiement 03/12/2019
+date date_defaut
+
+partie client 0xCA35b7d915458EF540aDe6068dFe2F44E8fa733c
+partie prestataire 0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C
+partie oracle
+
+droit prestataire ou client PEUT suspendre
+
+droit client et prestataire PEUT reprendre
+
+auto exec tous PEUT verifier_retard :
+	SI date_paiement passé ALORS 
+		ajoute majoration à prix
+		date date_defaut dans 10 jours
+		desactive verifier_retard
+	FIN SI
+	
+exec prestataire PEUT approuver_paiement :
+	date date_paiement dans 30 jours après date_paiement
+	active verifier_retard
+	active verifier_defaut
+	
+auto exec tous PEUT verifier_defaut :
+	SI date_defaut passé ALORS
+		suspendre
+		desactive verifier_defaut
+	FIN SI
+
+
